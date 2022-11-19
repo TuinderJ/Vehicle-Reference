@@ -15,14 +15,6 @@ Value.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    label_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    vehicle_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
   },
   {
     sequelize,

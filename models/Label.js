@@ -16,6 +16,10 @@ Label.init(
       allowNull: false,
       unique: true,
     },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     sequelize,
