@@ -14,7 +14,6 @@ Label.init(
     label: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     categoryId: {
       type: DataTypes.INTEGER,

@@ -13,7 +13,7 @@ const categoryData = require('./categoryData.json');
 const vehicleData = require('./vehicleData.json');
 const labelData = require('./labelData.json');
 const valueData = require('./valueData.json');
-const valueLabelVehicleData = require('./valueLabelVehicle.json');
+const valueLabelVehicleData = require('./valueLabelVehicleData.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });

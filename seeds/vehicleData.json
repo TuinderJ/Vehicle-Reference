@@ -1146,13 +1146,30 @@
     "vin": "54DC4W1B8GS809633"
   },
   {
+    "unitNumber": "272530",
+    "customerUnitNumber": "434",
+    "vin": "1XPBDP9X8MD740639"
+  },
+  {
     "unitNumber": "272536",
     "customerUnitNumber": "78",
     "vin": "3FRXF7FC9FV671063"
   },
   {
+    "unitNumber": "272542",
+    "vin": "1XPBDP9X7PD853776"
+  },
+  {
     "unitNumber": "272552",
     "vin": "2NP8IJ0X9NM822344"
+  },
+  {
+    "unitNumber": "272553",
+    "vin": "2NP3XJ0X6NM776082"
+  },
+  {
+    "unitNumber": "272554",
+    "vin": "2NP3XJ0X2NM775821"
   },
   {
     "unitNumber": "453658",
@@ -1169,6 +1186,11 @@
   {
     "unitNumber": "459512",
     "vin": "1XPBD49X4LD723818"
+  },
+  {
+    "unitNumber": "459572",
+    "customerUnitNumber": "761686",
+    "vin": "1NPCL40X5MD761686"
   },
   {
     "unitNumber": "495100",
@@ -1293,31 +1315,12 @@
     "customerUnitNumber": "749",
     "vin": "5HTSA4427J7600902"
   },
-  { "customerUnitNumber": "773", "vin": "558MTBN29KB00437" },
   {
-    "unitNumber": "272530",
-    "customerUnitNumber": "434",
-    "vin": "1XPBDP9X8MD740639"
+    "customerUnitNumber": "773",
+    "vin": "558MTBN29KB00437"
   },
   {
     "customerUnitNumber": "725",
     "vin": "558MTBN27GB003228"
-  },
-  {
-    "unitNumber": "272553",
-    "vin": "2NP3XJ0X6NM776082"
-  },
-  {
-    "unitNumber": "272554",
-    "vin": "2NP3XJ0X2NM775821"
-  },
-  {
-    "unitNumber": "272542",
-    "vin": "1XPBDP9X7PD853776"
-  },
-  {
-    "unitNumber": "459572",
-    "customerUnitNumber": "761686",
-    "vin": "1NPCL40X5MD761686"
   }
 ]
