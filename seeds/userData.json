@@ -1,17 +1,31 @@
 [
   {
-    "name": "Sal",
-    "email": "sal@hotmail.com",
-    "password": "password12345"
+    "name": "Joshua Tuinder",
+    "email": "josh@fake.com",
+    "password": "password12345",
+    "admin": true
   },
   {
-    "name": "Lernantino",
-    "email": "lernantino@gmail.com",
-    "password": "password12345"
+    "name": "Angi Adema",
+    "email": "angi@fake.com",
+    "password": "password12345",
+    "admin": true
   },
   {
-    "name": "Amiko",
-    "email": "amiko2k20@aol.com",
+    "name": "Hugo Garcia",
+    "email": "hugo@fake.com",
+    "password": "password12345",
+    "admin": true
+  },
+  {
+    "name": "Sean Grant",
+    "email": "sean@fake.com",
+    "password": "password12345",
+    "admin": true
+  },
+  {
+    "name": "Dummy",
+    "email": "dummy@fake.com",
     "password": "password12345"
   }
 ]

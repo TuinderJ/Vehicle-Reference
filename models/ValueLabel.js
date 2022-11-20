@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Label extends Model {}
+class ValueLabel extends Model {}
 
-Label.init(
+ValueLabel.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -11,8 +11,12 @@ Label.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    label: {
-      type: DataTypes.STRING,
+    lValueId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    labelId: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
   },
@@ -21,8 +25,8 @@ Label.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'label',
+    modelName: 'value_label',
   }
 );
 
-module.exports = Label;
+module.exports = ValueLabel;

@@ -1,13 +1,61 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const {
+  User,
+  Category,
+  Vehicle,
+  Label,
+  Value,
+  ValueVehicle,
+} = require('../models');
+const { sequelize } = require('../models/User');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
-    res.render('homepage', {
-      logged_in: req.session.logged_in,
+    const data = await Vehicle.findAll({
+      where: { unitNumber: '272171' },
+      include: {
+        model: Category,
+        attributes: {
+          exclude: ['vehicleCategory'],
+        },
+        include: {
+          model: Label,
+          attributes: {
+            exclude: ['categoryId'],
+          },
+          include: {
+            model: Value,
+            attributes: {
+              exclude: ['valueLabel'],
+            },
+            // attributes: {
+            //   include: [
+            //     [
+            //       sequelize.literal(`(
+            //       SELECT * FROM value
+            //       WHERE vehicle_id = vehicle.id
+            //     `),
+            //     ],
+            //   ],
+            // },
+          },
+        },
+      },
     });
+    // const data = await Category.findAll({
+    //   where: { id: 1 },
+    //   include: {
+    //     model: Label,
+    //   },
+    // });
+    console.log(data);
+    res.json(data);
+    // res.render('homepage', {
+    //   logged_in: req.session.logged_in,
+    // });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

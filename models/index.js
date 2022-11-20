@@ -3,27 +3,39 @@ const Category = require('../models/Category');
 const Vehicle = require('../models/Vehicle');
 const Label = require('../models/Label');
 const Value = require('../models/Value');
-const ValueLabelVehicle = require('../models/ValueLabelVehicle');
+const ValueLabel = require('../models/ValueLabel');
+const ValueVehicle = require('../models/ValueVehicle');
+const VehicleCategory = require('../models/VehicleCategory');
+const sequelize = require('../config/connection');
 
-Category.hasMany(Label, { foreignKey: 'category_id' });
-Label.belongsTo(Category, { foreignKey: 'category_id' });
+Category.hasMany(Label, { foreignKey: 'categoryId' });
+Label.belongsTo(Category);
+
+Vehicle.belongsToMany(Category, {
+  through: VehicleCategory,
+  foreignKey: 'vehicleId',
+});
+Category.belongsToMany(Vehicle, {
+  through: VehicleCategory,
+  foreignKey: 'categoryId',
+});
 
 Label.belongsToMany(Value, {
-  through: ValueLabelVehicle,
-  foreignKey: 'label_id',
+  through: ValueLabel,
+  foreignKey: 'labelId',
 });
 Value.belongsToMany(Label, {
-  through: ValueLabelVehicle,
-  foreignKey: 'value_id',
+  through: ValueLabel,
+  foreignKey: 'lValueId',
 });
 
 Vehicle.belongsToMany(Value, {
-  through: ValueLabelVehicle,
-  foreignKey: 'vehicle_id',
+  through: ValueVehicle,
+  foreignKey: 'vehicleId',
 });
 Value.belongsToMany(Vehicle, {
-  through: ValueLabelVehicle,
-  foreignKey: 'value_id',
+  through: ValueVehicle,
+  foreignKey: 'valueId',
 });
 
 module.exports = {
@@ -32,5 +44,7 @@ module.exports = {
   Vehicle,
   Label,
   Value,
-  ValueLabelVehicle,
+  ValueLabel,
+  ValueVehicle,
+  VehicleCategory,
 };

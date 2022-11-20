@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class ValueLabelVehicle extends Model {}
+class ValueVehicle extends Model {}
 
-ValueLabelVehicle.init(
+ValueVehicle.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -15,13 +15,10 @@ ValueLabelVehicle.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    labelId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     vehicleId: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      unique: false,
     },
   },
   {
@@ -29,8 +26,8 @@ ValueLabelVehicle.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'value_label_vehicle',
+    modelName: 'value_vehicle',
   }
 );
 
-module.exports = ValueLabelVehicle;
+module.exports = ValueVehicle;
