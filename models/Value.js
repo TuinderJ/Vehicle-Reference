@@ -15,6 +15,10 @@ Value.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    labelId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     sequelize,

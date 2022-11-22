@@ -1,13 +1,5 @@
 const router = require('express').Router();
-const {
-  User,
-  Category,
-  Vehicle,
-  Label,
-  Value,
-  ValueVehicle,
-} = require('../models');
-const { sequelize } = require('../models/User');
+const { User, Category, Vehicle, Label, Value } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
@@ -24,32 +16,38 @@ router.get('/', async (req, res) => {
           attributes: {
             exclude: ['categoryId'],
           },
-          include: {
-            model: Value,
-            attributes: {
-              exclude: ['valueLabel'],
-            },
-            // attributes: {
-            //   include: [
-            //     [
-            //       sequelize.literal(`(
-            //       SELECT * FROM value
-            //       WHERE vehicle_id = vehicle.id
-            //     `),
-            //     ],
-            //   ],
-            // },
-          },
         },
       },
     });
-    // const data = await Category.findAll({
-    //   where: { id: 1 },
-    //   include: {
-    //     model: Label,
-    //   },
-    // });
-    console.log(data);
+    const vehicleData = data.map((vehicle) => vehicle.get({ plain: true }));
+    console.log(vehicleData);
+
+    const id = data[0].id;
+
+    const valueData = await Vehicle.findAll({
+      where: { id },
+      attributes: {
+        exclude: [Vehicle],
+      },
+      include: {
+        model: Value,
+        attributes: {
+          exclude: ['value_vehicle'],
+        },
+      },
+    });
+
+    vehicleData[0].categories.forEach((category) => {
+      category.labels.forEach((label) => {
+        valueData[0].values.forEach(({ id, value, labelId }) => {
+          if (label.id === labelId) {
+            console.log(id, value);
+            label.values = [{ id, value }];
+          }
+        });
+      });
+    });
+
     res.json(data);
     // res.render('homepage', {
     //   logged_in: req.session.logged_in,
