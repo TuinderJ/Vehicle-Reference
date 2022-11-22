@@ -20,7 +20,6 @@ router.get('/', async (req, res) => {
       },
     });
     const vehicleData = data.map((vehicle) => vehicle.get({ plain: true }));
-    console.log(vehicleData);
 
     const id = data[0].id;
 
