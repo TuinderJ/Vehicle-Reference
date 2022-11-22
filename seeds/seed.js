@@ -21,10 +21,7 @@ const vehicleData = require('./project2VehicleJSON.json');
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
-  await User.bulkCreate(userData, {
-    individualHooks: true,
-    returning: true,
-  });
+  await User.bulkCreate(userData );
 
   // await Category.bulkCreate(categoryData);
   await NewVehicle.bulkCreate(vehicleData);

@@ -13,7 +13,6 @@ NewVehicle.init(
     },
     unitNumber: {
       type: DataTypes.STRING,
-      unique: true,
     },
     customerUnitNumber: {
       type: DataTypes.STRING,
@@ -33,7 +32,7 @@ NewVehicle.init(
       unique: true,
     },
     modelYear: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
       },
     vehicleMake: {
         type: DataTypes.STRING,
