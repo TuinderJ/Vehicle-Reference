@@ -1,9 +1,11 @@
 function adminAuth(role) {
   return (req, res, next) => {
-    res.status(401)
-    return res.send('No permissions');
+    if (req.user.role !== role) {
+      res.status(401)
+      return res.send('No permissions');
+    }
+    next();
   }
-  next();
 }
 
 // const adminAuth = (req, res, next) => {
