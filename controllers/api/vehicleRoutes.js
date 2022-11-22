@@ -1,25 +1,27 @@
 const router = require('express').Router();
-const { Vehicle } = require('../../models');
+const { NewVehicle } = require('../../models');
 const withAuth = require();
 
-//Search for a single vehicle, all can view. MAY NEED TO UPDATE HANDLEBARS TITLE IN res.render.
-router.get('/vehicle/:id', async (req, res) => {
+// //Search for a single vehicle, all can view. MAY NEED TO UPDATE HANDLEBARS TITLE IN res.render.
+router.get('/', async (req, res) => {
     try {
-        const singleVehicle = await Vehicle.findByPk(req.params.id, {
-            where: {},
-            include: {},
+        const vehicles =  await NewVehicle.findAll()
+        // const singleVehicle = await Vehicle.findByPk(req.params.id, {
+        //     where: {},
+        //     include: {},
 
-        });
-        if (singleVehicle) {
-            const vehicle = singleVehicle.get({ plain: true });
+        // });
+        // if (singleVehicle) {
+        //     const vehicle = singleVehicle.get({ plain: true });
 
-            res.render('single-vehicle', { vehicle });
-        } else {
-            if (!singleVehicle) {
-                res.status(404).json({ message: 'No vehicle found with that id!' });
-                return;
-            }
-        }
+        //     res.render('single-vehicle', { vehicle });
+        // } else {
+        //     if (!singleVehicle) {
+        //         res.status(404).json({ message: 'No vehicle found with that id!' });
+        //         return;
+        //     }
+        // }
+        res.status(200).json(vehicles);
     } catch (err) {
         res.status(500).json(err);
     }

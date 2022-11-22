@@ -11,6 +11,13 @@ router.post('/', async (req, res) => {
       req.session.logged_in = true;
       req.session.username = addedUser.username;
 
+      if(addedUser.admin){
+        req.session.admin = true
+      }else{
+
+        req.session.admin = false
+      }
+      
       res.status(200).json(userData);
     });
   } catch (err) {
@@ -22,14 +29,13 @@ router.post('/', async (req, res) => {
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-    console.log("🚀 ~ file: userRoutes.js ~ line 22 ~ router.post ~ userData", userData)
 
     if (!userData) {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
 
-    const validPassword = await userData.checkPassword(req.body.password);
+    const validPassword = userData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
@@ -39,6 +45,13 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
+
+      if(addedUser.admin){
+        req.session.admin = true
+      }else{
+
+        req.session.admin = false
+      }
       
       res.json({ user: userData, message: 'You are now logged in!' });
     });

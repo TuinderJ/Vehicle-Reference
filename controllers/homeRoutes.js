@@ -19,6 +19,7 @@ router.get('/', async (req, res) => {
         },
       },
     });
+
     const vehicleData = data.map((vehicle) => vehicle.get({ plain: true }));
 
     const id = data[0].id;
@@ -55,6 +56,27 @@ router.get('/', async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
+});
+
+router.get('/vehicle/:id', async (req, res) => {
+    try {
+        const singleVehicle = await Vehicle.findByPk(req.params.id, {
+            include: [Category, Label, Value],
+
+        });
+        if (singleVehicle) {
+            const vehicle = singleVehicle.get({ plain: true });
+
+            res.render('single-vehicle', { vehicle });
+        } else {
+            if (!singleVehicle) {
+                res.status(404).json({ message: 'No vehicle found with that id!' });
+                return;
+            }
+        }
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
 // Use withAuth middleware to prevent access to route

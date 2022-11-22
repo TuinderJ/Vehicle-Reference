@@ -26,6 +26,7 @@
   {
     "name": "Dummy",
     "email": "dummy@fake.com",
-    "password": "password12345"
+    "password": "password12345",
+    "admin": false
   }
 ]
