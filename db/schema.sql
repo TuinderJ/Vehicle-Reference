@@ -1,2 +1,0 @@
-DROP DATABASE IF EXISTS vehicle_db;
-CREATE DATABASE vehicle_db;
