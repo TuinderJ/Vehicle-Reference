@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+//Create user route and post.
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
@@ -8,6 +9,7 @@ router.post('/', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
+      req.session.username = addedUser.username;
 
       res.status(200).json(userData);
     });
@@ -16,24 +18,21 @@ router.post('/', async (req, res) => {
   }
 });
 
+//Create login route for the admin and regular logged in user.
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
     console.log("🚀 ~ file: userRoutes.js ~ line 22 ~ router.post ~ userData", userData)
 
     if (!userData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+      res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
 
     const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+      res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
 
@@ -49,6 +48,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+//User log out.
 router.post('/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
@@ -59,4 +59,5 @@ router.post('/logout', (req, res) => {
   }
 });
 
+//Export the routes.
 module.exports = router;
