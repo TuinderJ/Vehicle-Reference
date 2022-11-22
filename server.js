@@ -6,7 +6,7 @@ const routes = require('./controllers');
 const helpers = require('./utils/helpers');
 
 //Login authorization.
-const { withAuth } = require('./utils/auth'); //Add app.get in this page for admin and regular user?
+const { withAuth, adminAuth } = require('./utils/auth'); //Add app.get in this page for admin and regular user?
 
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
