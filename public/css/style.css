@@ -32,3 +32,8 @@ h2 {
     cursor: pointer;
     font-weight: 600;
 }
+
+.tab.content {
+    background-color: #fff;
+    padding: 50px 40px;
+}
