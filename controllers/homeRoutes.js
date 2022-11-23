@@ -47,10 +47,10 @@ router.get('/', async (req, res) => {
       });
     });
 
-    res.json(data);
-    // res.render('homepage', {
-    //   logged_in: req.session.logged_in,
-    // });
+    // res.json(data);
+    res.render('homepage', {
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
