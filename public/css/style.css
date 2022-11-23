@@ -8,11 +8,24 @@ html {
     padding: 0;
     margin: 0;
     font-family: sans-serif;
+    background-color: white;
     color: #144EA2
 }
 
 
 
+.mytabs {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 25px;
+}
+
+.mytabs input[type="radio"] {
+    display: none;
+
+}
 
 
 
