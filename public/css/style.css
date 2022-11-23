@@ -6,15 +6,29 @@
 }
 
 body {
-    background-color:#6BA9FF;
+    background-color:white;
 }
 
 .login-page {
     width: 80vmin;
-    border: 1px solid white;
+    border: 1px solid #6BA9FF;
     position: absolute;
     transform: translateX(-50%);
     left: 50%;
     top: 120px;
     background-color: #fff;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+h2 {
+    background-color: #6BA9FF;
+    text-align: center;
+    padding: 15px 0;
+    cursor: pointer;
+    font-weight: 600;
 }
