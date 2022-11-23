@@ -5,7 +5,7 @@ const withAuth = require('../utils/auth');
 router.get('/', async (req, res) => {
   try {
     const data = await NewVehicle.findAll({
-      where: { unitNumber: '139406' },
+      // where: { unitNumber: '139406' },
       // include: {
       //   model: Category,
       //   attributes: {
@@ -61,6 +61,25 @@ router.get('/', async (req, res) => {
 
 router.get('/vehicle/:id', async (req, res) => {
     try {
+
+      const data = await NewVehicle.findAll({
+        where: { unitNumber: req.params.id },
+        // include: {
+        //   model: Category,
+        //   attributes: {
+        //     exclude: ['vehicleCategory'],
+        //   },
+        //   include: {
+        //     model: Label,
+        //     attributes: {
+        //       exclude: ['categoryId'],
+        //     },
+        //   },
+        // },
+      });
+  
+      const vehicleData = data.map((vehicle) => vehicle.get({ plain: true }));
+  
         // const singleVehicle = await Vehicle.findByPk(req.params.id, {
         //     include: [Category, Label, Value],
 
@@ -75,6 +94,11 @@ router.get('/vehicle/:id', async (req, res) => {
         //         return;
         //     }
         // }
+
+        res.render('single-vehicle', {
+          vehicleData,
+          logged_in: req.session.logged_in,
+        })
     } catch (err) {
         res.status(500).json(err);
     }
