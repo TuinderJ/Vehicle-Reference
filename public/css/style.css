@@ -27,8 +27,17 @@ html {
 
 }
 
-
-
+.mytabs lable {
+    padding: 25px;
+    background: #6BA9FF;
+    font-weight: bold;  
+}
+.mytabs .tab {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    
+}
 
 
 
