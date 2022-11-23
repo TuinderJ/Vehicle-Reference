@@ -1,48 +1,6 @@
 * {
-    box-sizing: border-box;
-}
-
-body,
-html {
-    height: 100%;
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
-    background-color: white;
-    color: #144EA2
-}
-
-
-
-.mytabs {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 25px;
-}
-
-.mytabs input[type="radio"] {
-    display: none;
-
-}
-
-.mytabs lable {
-    padding: 25px;
-    background: #6BA9FF;
-    font-weight: bold;  
-}
-.mytabs .tab {
-    width: 100%;
-    padding: 20px;
-    background-color: #fff;
-    
-}
-
-
-
-
-.login-page {
-    border: 3px solid #144EA2;
-    padding-bottom: 10px;
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
 }
