@@ -49,19 +49,27 @@ h2 {
     display: contents;
 }
 
-/* .tab-content .active {
+.tab-content .active {
     display: block;
-} */
+}
 
-/* .tab .active {
+.tab .active {
     background-color: #fff;
     color: black;
 
-} */
+}
 
-/* .password {
+.tab-content label {
     text-align: justify;
     line-height: 1.9;
     letter-spacing: 0.4px;
-    color:rgba(0, 0, 0, 0.2)
-} */
+    color: black
+}
+
+.button {
+    background-color: #6BA9FF;
+    color:black;
+    width: 150px;
+    height: 40px;
+    font-weight: bold;
+}
