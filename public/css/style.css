@@ -37,3 +37,31 @@ h2 {
     background-color: #fff;
     padding: 50px 40px;
 }
+
+.tab-content h4 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: black;
+    font-weight: 600;
+}
+
+.tab-content div {
+    display: contents;
+}
+
+/* .tab-content .active {
+    display: block;
+} */
+
+/* .tab .active {
+    background-color: #fff;
+    color: black;
+
+} */
+
+/* .password {
+    text-align: justify;
+    line-height: 1.9;
+    letter-spacing: 0.4px;
+    color:rgba(0, 0, 0, 0.2)
+} */
