@@ -1,13 +1,58 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, Category, Vehicle, Label, Value } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
-    res.render('homepage', {
-      logged_in: req.session.logged_in,
+    const data = await Vehicle.findAll({
+      where: { unitNumber: '272171' },
+      include: {
+        model: Category,
+        attributes: {
+          exclude: ['vehicleCategory'],
+        },
+        include: {
+          model: Label,
+          attributes: {
+            exclude: ['categoryId'],
+          },
+        },
+      },
     });
+    const vehicleData = data.map((vehicle) => vehicle.get({ plain: true }));
+
+    const id = data[0].id;
+
+    const valueData = await Vehicle.findAll({
+      where: { id },
+      attributes: {
+        exclude: [Vehicle],
+      },
+      include: {
+        model: Value,
+        attributes: {
+          exclude: ['value_vehicle'],
+        },
+      },
+    });
+
+    vehicleData[0].categories.forEach((category) => {
+      category.labels.forEach((label) => {
+        valueData[0].values.forEach(({ id, value, labelId }) => {
+          if (label.id === labelId) {
+            console.log(id, value);
+            label.values = [{ id, value }];
+          }
+        });
+      });
+    });
+
+    res.json(data);
+    // res.render('homepage', {
+    //   logged_in: req.session.logged_in,
+    // });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
