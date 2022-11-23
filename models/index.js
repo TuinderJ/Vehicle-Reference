@@ -1,6 +1,6 @@
 const User = require('./User');
-const NewVehicle = require('./NewVehicle')
-// const Category = require('../models/Category');
+const NewVehicle = require('./NewVehicle');
+const Category = require('../models/Category');
 // const Vehicle = require('../models/Vehicle');
 // const Label = require('../models/Label');
 // const Value = require('../models/Value');
@@ -8,8 +8,8 @@ const NewVehicle = require('./NewVehicle')
 // const VehicleCategory = require('../models/VehicleCategory');
 
 User.hasMany(NewVehicle, {
-  foreignKey: 'userId'
-})
+  foreignKey: 'user_id',
+});
 
 // Category.hasMany(Label, { foreignKey: 'categoryId' });
 // Label.belongsTo(Category);
@@ -19,9 +19,12 @@ User.hasMany(NewVehicle, {
 //   through: VehicleCategory,
 //   foreignKey: 'vehicleId',
 // });
-// Category.belongsToMany(Vehicle, {
-//   through: VehicleCategory,
-//   foreignKey: 'categoryId',
+NewVehicle.belongsTo(Category, {
+  foreignKey: 'category_id',
+});
+
+// NewVehicle.hasMany(Category, {
+//   foreignKey: 'category_id',
 // });
 
 // Vehicle.belongsToMany(Value, {
@@ -36,8 +39,8 @@ User.hasMany(NewVehicle, {
 
 module.exports = {
   User,
-  NewVehicle
-  // Category,
+  NewVehicle,
+  Category,
   // Vehicle,
   // Label,
   // Value,

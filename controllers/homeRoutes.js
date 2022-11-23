@@ -1,10 +1,11 @@
 const router = require('express').Router();
-const { User, NewVehicle } = require('../models');
+const { User, NewVehicle, Category } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
     const data = await NewVehicle.findAll({
+      include: [Category]
       // where: { unitNumber: '139406' },
       // include: {
       //   model: Category,
@@ -48,7 +49,7 @@ router.get('/', async (req, res) => {
     //   });
     // });
 
-    // res.json(data);
+console.log(vehicleData[0])
     res.render('homepage', {
       vehicleData,
       logged_in: req.session.logged_in,

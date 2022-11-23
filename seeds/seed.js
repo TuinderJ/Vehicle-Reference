@@ -1,8 +1,8 @@
 const sequelize = require('../config/connection');
 const {
   User,
-  NewVehicle
-  // Category,
+  NewVehicle,
+  Category,
   // Vehicle,
   // Label,
   // Value,
@@ -11,7 +11,7 @@ const {
 } = require('../models');
 
 const userData = require('./userData.json');
-// const categoryData = require('./categoryData.json');
+const categoryData = require('./categoryData1.json');
 const vehicleData = require('./project2VehicleJSON.json');
 // const vehicleCategoryData = require('./vehicleCategoryData.json');
 // const labelData = require('./labelData.json');
@@ -23,7 +23,7 @@ const seedDatabase = async () => {
 
   await User.bulkCreate(userData );
 
-  // await Category.bulkCreate(categoryData);
+  await Category.bulkCreate(categoryData);
   await NewVehicle.bulkCreate(vehicleData);
   // await Label.bulkCreate(labelData);
   // await Value.bulkCreate(valueData);
