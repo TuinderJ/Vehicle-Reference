@@ -4,3 +4,17 @@
     box-sizing: border-box;
     font-family: "poppins", sans-serif;
 }
+
+body {
+    background-color:#6BA9FF;
+}
+
+.login-page {
+    width: 80vmin;
+    border: 1px solid white;
+    position: absolute;
+    transform: translateX(-50%);
+    left: 50%;
+    top: 120px;
+    background-color: #fff;
+}
