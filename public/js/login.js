@@ -53,7 +53,7 @@ document
   .addEventListener('submit', signupFormHandler);
 
 
-  let tab = document.querySelector(".tab.form");
+  let tab = document.querySelector(".tab-form");
   let tabHeader = tab.querySelector(".tab-header");
   let tabHeaderElements = tab.querySelectorAll(".tab-header > div");
   let tabBody = tab.querySelector(".tab-body");
