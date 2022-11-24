@@ -37,6 +37,28 @@ body {
 }
 .tab-form .tab-body {
     position: relative;
-    min-height: 360px;
+    min-height:360px;
     overflow:hidden;
+}
+.tab-form .tab-body > div {
+    position:absolute;
+    width:100%;
+    top:-150vh;
+    opacity:0;
+    padding:5px 25px;
+    transition:opacity 300ms ease-in-out 0ms; 
+}
+.tab-form .tab-body > div.active {
+    top:0px;
+    opacity:1;
+    transition:opacity 300ms ease-in-out 0ms ;
+}
+.tab-form .tab-body > div h2 {
+    font-size: 25px;
+    color:#4a9ff3;
+    text-align:center;
+    margin-bottom: 20px;
+}
+.tab-form .tab-body > div .form-input {
+    margin: 10px 0px;
 }
