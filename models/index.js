@@ -14,10 +14,6 @@ Vehicle.belongsToMany(Category, {
   through: VehicleCategory,
   foreignKey: 'vehicleId',
 });
-Category.belongsToMany(Vehicle, {
-  through: VehicleCategory,
-  foreignKey: 'categoryId',
-});
 
 Vehicle.belongsToMany(Value, {
   through: ValueVehicle,
