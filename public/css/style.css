@@ -62,3 +62,13 @@ body {
 .tab-form .tab-body > div .form-input {
     margin: 10px 0px;
 }
+.tab-form .tab-body > div .form-input label {
+    display: block;
+    font-size: 15px;
+}
+.tab-form .tab-body > div .form-input input {
+    width:100%;
+    margin-top: 5px;
+    font-size: 15px;
+    padding:8px;
+}
