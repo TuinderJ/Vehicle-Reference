@@ -45,7 +45,10 @@ router.get('/', async (req, res) => {
       });
     });
 
-    res.json(vehicleData);
+    // res.json(data);
+    res.render('homepage', {
+      logged_in: req.session.logged_in,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
