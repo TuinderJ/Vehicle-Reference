@@ -7,10 +7,6 @@ const Category = require('../models/Category');
 // const ValueVehicle = require('../models/ValueVehicle');
 // const VehicleCategory = require('../models/VehicleCategory');
 
-User.hasMany(NewVehicle, {
-  foreignKey: 'user_id',
-});
-
 // Category.hasMany(Label, { foreignKey: 'categoryId' });
 // Label.belongsTo(Category);
 
