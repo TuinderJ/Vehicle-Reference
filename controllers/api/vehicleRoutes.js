@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { Vehicle, Category, Label, Value } = require('../../models');
 const withAuth = require('../../utils/auth');
 const { Op } = require('sequelize');
+const adminAuth = require('../../utils/adminauth');
 
 router.get('/', async (req, res) => {
   try {
@@ -24,7 +25,6 @@ router.get('/', async (req, res) => {
 
     const data = await Vehicle.findAll({
       where: { ...searchTerm },
-      // where: { vin: { [Op.endsWith]: last8 } },
       include: {
         model: Category,
         attributes: {
@@ -41,17 +41,15 @@ router.get('/', async (req, res) => {
 
     const vehicleData = data.map((vehicle) => vehicle.get({ plain: true }));
 
-    console.log(vehicleData);
     if (!vehicleData[0]) {
       return res
         .status(404)
         .json({ message: 'The vehicle searched for is not found.' });
     }
 
-    vehicleData.forEach(async (vehicle) => {
+    for (let i = 0; i < vehicleData.length; i++) {
+      const vehicle = vehicleData[i];
       const id = vehicle.id;
-      console.log(vehicle);
-
       const valueData = await Vehicle.findAll({
         where: { id },
         attributes: {
@@ -64,18 +62,19 @@ router.get('/', async (req, res) => {
           },
         },
       });
-     
-      vehicle.categories.forEach((category) => {
-        category.labels.forEach((label) => {
-          valueData[0].values.forEach(({ id, value, labelId }) => {
-            if (label.id === labelId) {
-              label.push(values: [{ id, value }]);
-            }
-          });
-        });
-      });
-    });
 
+      for (let ii = 0; ii < vehicle.categories.length; ii++) {
+        const category = vehicle.categories[ii];
+
+        for (let iii = 0; iii < category.labels.length; iii++) {
+          const label = category.labels[iii];
+
+          valueData[0].values.forEach(({ id, value, labelId }) => {
+            if (label.id === labelId) label['values'] = [{ id, value }];
+          });
+        }
+      }
+    }
 
     res.json(vehicleData);
   } catch (err) {
@@ -114,20 +113,21 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // //Delete vehicle, ONLY ADMIN.
-// router.delete('/:id', withAuth, async (req, res) => {
-//     try {
-//         // const deleteVehicle = await Vehicle.destroy({
-//         //     where: {},
-//         // });
-
-//         // if (!deleteVehicle) {
-//         //     res.status(404).json({ message: 'No vehicle found with this id!' });
-//         // }
-//         // res.status(200).json(deleteVehicle);
-//     } catch (err) {
-//         res.status(500).json(err);
-//     }
-// });
+router.delete('/:id', adminAuth, async (req, res) => {
+  try {
+    const id = req.params.id;
+    const deleteVehicle = await Vehicle.destroy({
+      where: { id },
+    });
+    console.log(deleteVehicle);
+    if (!deleteVehicle) {
+      return res.status(404).json({ message: 'No vehicle found with this id!' });
+    }
+    res.status(200).json(deleteVehicle);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // //Export the file.
 module.exports = router;
