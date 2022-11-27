@@ -5,6 +5,52 @@
 
 
 {{!-- need hugo's search bar code --}}
+
+<form action="" class="main-form">
+      <div class="inputEl">
+        <input type="text" class="searchEl" />
+      </div>
+      <div class="radiosMainbox">
+        <input type="radio" name="radioEl" id="Unit" checked/>
+        <label for="Unit" class="radioLabel">Unit<br>Number</label>
+        <input type="radio" name="radioEl" id="Customer"/>
+        <label for="Customer" class="radioLabel"> Customer Unit<br>Number</label>
+        <input type="radio" name="radioEl" id="VIN"/>
+        <label for="VIN" class="radioLabel">VIN</label>
+        <input type="radio" name="radioEl" id="LastFour"/>
+        <label for="LastFour" class="radioLabel">Last 8<br>of VIN</label>
+      </div>
+      <div class="buttonDiv">
+        <button class="searchBtn">SEARCH</button>
+      </div>
+    </form>
+    <table class="infoBoxes">
+      <tbody class="userInfobox">
+        <tr class="titleRow">
+          <th>General</th>
+        </tr>
+        <tr class="row">
+          <td>Customer Name:</td>
+          <td>Star Transport LLC</td>
+        </tr>
+        <tr class="row">
+          <td>Unit Type:</td>
+          <td>FSL</td>
+        </tr>
+        <tr class="row">
+          <td>Mobile Service:</td>
+          <td>Yes</td>
+        </tr>
+        <tr class="row">
+          <td>Model Year:</td>
+          <td>2021</td>
+        </tr>
+        <tr class="row">
+          <td>Vehicle Make:</td>
+          <td>Peterbilt</td>
+        </tr>
+      </tbody>
+    </table>
   <div>
     <ul>
       <li>
