@@ -11,11 +11,11 @@ VehicleCategory.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    vehicle_id: {
+    cVehicleId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    category_id: {
+    categoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

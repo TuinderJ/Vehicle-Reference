@@ -1,5 +1,11 @@
 const router = require('express').Router();
-const { Vehicle, Category, Label, Value } = require('../../models');
+const {
+  Vehicle,
+  Category,
+  Label,
+  Value,
+  VehicleCategory,
+} = require('../../models');
 const withAuth = require('../../utils/auth');
 const { Op } = require('sequelize');
 const adminAuth = require('../../utils/adminauth');
@@ -86,10 +92,30 @@ router.get('/', async (req, res) => {
 // //Create a new vehicle, only admin and logged in users.
 router.post('/', withAuth, async (req, res) => {
   try {
-    // const addVehicle = await Vehicle.create(req.body);
-    // res.status(200).json(addVehicle);
+    const { unitNumber, customerUnitNumber, vin, categories, values } =
+      req.body;
+    const newVehicle = { unitNumber, customerUnitNumber, vin };
+
+    const addedVehicle = await Vehicle.create(newVehicle);
+
+    const { id: vehicleId } = addedVehicle;
+
+    const newCategories = categories.map((categoryId) => ({
+      cVehicleId: vehicleId,
+      categoryId,
+    }));
+    const newValues = values.map(({ labelId, value }) => ({
+      value,
+      labelId,
+      vehicleId,
+    }));
+    console.log(newCategories, newValues);
+
+    VehicleCategory.bulkCreate(newCategories);
+    Value.bulkCreate(newValues);
+    res.status(200).json(addedVehicle);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
