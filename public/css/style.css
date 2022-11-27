@@ -37,6 +37,89 @@ body {
 }
 .tab-form .tab-body {
     position: relative;
-    min-height: 360px;
+    min-height:360px;
     overflow:hidden;
+}
+.tab-form .tab-body > div {
+    position:absolute;
+    width:100%;
+    top:-150vh;
+    opacity:0;
+    padding:5px 25px;
+    transition:opacity 300ms ease-in-out 0ms; 
+}
+.tab-form .tab-body > div.active {
+    top:0px;
+    opacity:1;
+    transition:opacity 300ms ease-in-out 0ms ;
+}
+.tab-form .tab-body > div h2 {
+    font-size: 25px;
+    color:black;
+    text-align:center;
+    margin-bottom: 20px;
+}
+.tab-form .tab-body > div .login-input {
+    margin: 10px 0px;
+}
+.tab-form .tab-body > div .login-input label {
+    display: block;
+    font-size: 15px;
+}
+.tab-form .tab-body > div .login-input input {
+    width: 75%;
+    margin-top: 5px;
+    font-size: 15px;
+    padding:8px;
+}
+.tab-form .tab-body > div .login-input button {
+    width: 80%;
+    margin-top: 10px;
+    padding:10px;
+    font-size:15px;
+    border:none;
+    outline:none;
+    cursor: pointer;
+    background:#6BA9FF;
+    color:#144EA2;
+    font-weight:600;
+    
+}
+
+.tab-form .tab-body > div .signup-input {
+    margin: 10px 0px;
+}
+.tab-form .tab-body > div .signup-input label {
+    display: block;
+    font-size: 15px;
+}
+.tab-form .tab-body > div .signup-input input {
+    width: 75%;
+    margin-top: 5px;
+    font-size: 15px;
+    padding:8px;
+}
+.tab-form .tab-body > div .signup-input button {
+    width: 80%;
+    margin-top: 10px;
+    padding:10px;
+    font-size:15px;
+    border:none;
+    outline:none;
+    cursor: pointer;
+    background:#6BA9FF;
+    color:#144EA2;
+    font-weight:600;
+    
+}
+
+.card {
+    margin-bottom: 2%;
+    line-height: 150%;
+    border: 3px solid black;
+}
+
+.new-card-section {
+    display: flex;
+    justify-content: center;
 }
