@@ -112,12 +112,14 @@ body {
     font-weight:600;
     
 }
-.wrapper {
-    width: 100%;
-    min-height: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
+
+.card {
+    margin-bottom: 2%;
+    line-height: 150%;
+    border: 3px solid black;
 }
 
+.new-card-section {
+    display: flex;
+    justify-content: center;
+}
