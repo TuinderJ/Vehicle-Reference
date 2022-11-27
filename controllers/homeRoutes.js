@@ -1,11 +1,11 @@
 const router = require('express').Router();
-const { User, Category, Vehicle, Label, Value } = require('../models');
+const { Vehicle, Category, Label, Value } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
   try {
     const data = await Vehicle.findAll({
-      where: { unitNumber: '272171' },
+      where: { unitNumber: '139406' },
       include: {
         model: Category,
         attributes: {
@@ -19,6 +19,7 @@ router.get('/', async (req, res) => {
         },
       },
     });
+
     const vehicleData = data.map((vehicle) => vehicle.get({ plain: true }));
 
     const id = data[0].id;
@@ -39,10 +40,7 @@ router.get('/', async (req, res) => {
     vehicleData[0].categories.forEach((category) => {
       category.labels.forEach((label) => {
         valueData[0].values.forEach(({ id, value, labelId }) => {
-          if (label.id === labelId) {
-            console.log(id, value);
-            label.values = [{ id, value }];
-          }
+          if (label.id === labelId) label.values = [{ id, value }];
         });
       });
     });
@@ -57,20 +55,60 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/vehicle/:id', async (req, res) => {
+  try {
+    const data = await NewVehicle.findAll({
+      where: { unitNumber: req.params.id },
+      // include: {
+      //   model: Category,
+      //   attributes: {
+      //     exclude: ['vehicleCategory'],
+      //   },
+      //   include: {
+      //     model: Label,
+      //     attributes: {
+      //       exclude: ['categoryId'],
+      //     },
+      //   },
+      // },
+    });
+
+    // const singleVehicle = await Vehicle.findByPk(req.params.id, {
+    //     include: [Category, Label, Value],
+
+    // });
+    // if (singleVehicle) {
+    //     const vehicle = singleVehicle.get({ plain: true });
+
+    //     res.render('single-vehicle', { vehicle });
+    // } else {
+    //     if (!singleVehicle) {
+    //         res.status(404).json({ message: 'No vehicle found with that id!' });
+    //         return;
+    //     }
+    // }
+
+    res.render('single-vehicle', {
+      vehicleData,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // Use withAuth middleware to prevent access to route
 router.get('/profile', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const userData = await User.findByPk(req.session.user_id, {
-      attributes: { exclude: ['password'] },
-    });
-
-    const user = userData.get({ plain: true });
-
-    res.render('profile', {
-      ...user,
-      logged_in: true,
-    });
+    // const userData = await User.findByPk(req.session.user_id, {
+    //   attributes: { exclude: ['password'] },
+    // });
+    // const user = userData.get({ plain: true });
+    // res.render('profile', {
+    //   ...user,
+    //   logged_in: true,
+    // });
   } catch (err) {
     res.status(500).json(err);
   }
