@@ -112,3 +112,14 @@ body {
     font-weight:600;
     
 }
+
+.card {
+    margin-bottom: 2%;
+    line-height: 150%;
+    border: 3px solid black;
+}
+
+.new-card-section {
+    display: flex;
+    justify-content: center;
+}

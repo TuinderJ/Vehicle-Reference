@@ -1,6 +1,22 @@
-<div class="">
+<div class="new-card-section">
   <div class="">
     <h2>Welcome, {{name}}!</h2>
   </div>
+
+
+{{!-- need hugo's search bar code --}}
+  <div>
+    <ul>
+      <li>
+        {{!-- see how to select vehicle data via user input --}}
+        {{#each vehicleData as |card|}}
+          {{> vehicleData card}}
+        {{/each}}
+      </li>
+    </ul>
+  </div>
+
 </div>
 
+
+<script src="/public/js/profile.js"></script>
