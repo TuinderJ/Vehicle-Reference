@@ -1,3 +1,26 @@
+<main>
+    <form action="" class="main-form">
+      <div class="inputEl">
+        <input type="text" class="searchEl" />
+      </div>
+      <div class="radiosMainbox">
+        <input type="radio" name="radioEl" id="Unit" checked />
+        <label for="Unit" class="radioLabel">Unit<br />Number</label>
+        <input type="radio" name="radioEl" id="Customer" />
+        <label for="Customer" class="radioLabel">
+          Customer Unit<br />Number</label
+        >
+        <input type="radio" name="radioEl" id="VIN" />
+        <label for="VIN" class="radioLabel">VIN</label>
+        <input type="radio" name="radioEl" id="LastFour" />
+        <label for="LastFour" class="radioLabel">Last 8<br />of VIN</label>
+      </div>
+      <div class="buttonDiv">
+        <button class="searchBtn">SEARCH</button>
+      </div>
+    </form>
+
+    
 <div>
   <p>Homepage</p>
   {{#each vehicleData}}
