@@ -84,7 +84,6 @@ router.get('/', async (req, res) => {
 
     res.json(vehicleData);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -109,7 +108,6 @@ router.post('/', withAuth, async (req, res) => {
       labelId,
       vehicleId,
     }));
-    console.log(newCategories, newValues);
 
     VehicleCategory.bulkCreate(newCategories);
     Value.bulkCreate(newValues);
@@ -145,13 +143,10 @@ router.delete('/:id', adminAuth, async (req, res) => {
     const deleteVehicle = await Vehicle.destroy({
       where: { id },
     });
-    console.log(deleteVehicle);
-    if (!deleteVehicle) {
-      return res
-        .status(404)
-        .json({ message: 'No vehicle found with this id!' });
-    }
-    res.status(200).json(deleteVehicle);
+
+    !deleteVehicle
+      ? res.status(404).json({ message: 'No vehicle found with this id!' })
+      : res.status(200).json(deleteVehicle);
   } catch (err) {
     res.status(500).json(err);
   }
