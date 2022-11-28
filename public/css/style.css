@@ -1,12 +1,21 @@
+:root {
+    --light: #6BA9FF;
+    --medium: #4C8FED;
+    --dark: #144EA2;
+  }
 * {
-margin: 0px;
-padding:0px;
-/* box-shadow: border-box; */
-}
-body {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
     font-family: "Roboto", sans-serif;
-    background-color: white;
 }
+
+body {
+    background-image: linear-gradient(180deg, #cfe1fa, white);
+}
+
+/* --------------LOGIN FILE STYLING ---------------- */ 
+
 .tab-form {
     position: absolute;
     top: 50%;
@@ -15,102 +24,116 @@ body {
     width: 95%;
     max-width: 400px;
     background: #fff;
-    box-shadow:0px 2px 5px 2px rgba(0, 0, 0,0.8);
+    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.8);
 }
+
 .tab-form .tab-header {
-    display:flex;
-    justify-content:space-between;
-    padding:20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
 
 }
-.tab-form .tab-header > div {
-    flex:1;
-    padding:15px;
-    text-align:center;
+
+.tab-form .tab-header>div {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
     color: #555;
-    cursor:pointer;
+    cursor: pointer;
 }
-.tab-form .tab-header > div.active {
+
+.tab-form .tab-header>div.active {
     border: 1px solid #4a9ff3;
-    color:#4a9ff3;
+    color: #4a9ff3;
     background: #e9f4ff;
 }
+
 .tab-form .tab-body {
     position: relative;
-    min-height:360px;
-    overflow:hidden;
-}
-.tab-form .tab-body > div {
-    position:absolute;
-    width:100%;
-    top:-150vh;
-    opacity:0;
-    padding:5px 25px;
-    transition:opacity 300ms ease-in-out 0ms; 
-}
-.tab-form .tab-body > div.active {
-    top:0px;
-    opacity:1;
-    transition:opacity 300ms ease-in-out 0ms ;
-}
-.tab-form .tab-body > div h2 {
-    font-size: 25px;
-    color:black;
-    text-align:center;
-    margin-bottom: 20px;
-}
-.tab-form .tab-body > div .login-input {
-    margin: 10px 0px;
-}
-.tab-form .tab-body > div .login-input label {
-    display: block;
-    font-size: 15px;
-}
-.tab-form .tab-body > div .login-input input {
-    width: 75%;
-    margin-top: 5px;
-    font-size: 15px;
-    padding:8px;
-}
-.tab-form .tab-body > div .login-input button {
-    width: 80%;
-    margin-top: 10px;
-    padding:10px;
-    font-size:15px;
-    border:none;
-    outline:none;
-    cursor: pointer;
-    background:#6BA9FF;
-    color:#144EA2;
-    font-weight:600;
-    
+    min-height: 360px;
+    overflow: hidden;
 }
 
-.tab-form .tab-body > div .signup-input {
+.tab-form .tab-body>div {
+    position: absolute;
+    width: 100%;
+    top: -150vh;
+    opacity: 0;
+    padding: 5px 25px;
+    transition: opacity 300ms ease-in-out 0ms;
+}
+
+.tab-form .tab-body>div.active {
+    top: 0px;
+    opacity: 1;
+    transition: opacity 300ms ease-in-out 0ms;
+}
+
+.tab-form .tab-body>div h2 {
+    font-size: 25px;
+    color: black;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tab-form .tab-body>div .login-input {
     margin: 10px 0px;
 }
-.tab-form .tab-body > div .signup-input label {
+
+.tab-form .tab-body>div .login-input label {
     display: block;
     font-size: 15px;
 }
-.tab-form .tab-body > div .signup-input input {
+
+.tab-form .tab-body>div .login-input input {
     width: 75%;
     margin-top: 5px;
     font-size: 15px;
-    padding:8px;
+    padding: 8px;
 }
-.tab-form .tab-body > div .signup-input button {
+
+.tab-form .tab-body>div .login-input button {
     width: 80%;
     margin-top: 10px;
-    padding:10px;
-    font-size:15px;
-    border:none;
-    outline:none;
+    padding: 10px;
+    font-size: 15px;
+    border: none;
+    outline: none;
     cursor: pointer;
-    background:#6BA9FF;
-    color:#144EA2;
-    font-weight:600;
-    
+    background: #6BA9FF;
+    color: #144EA2;
+    font-weight: 600;
+
+}
+
+.tab-form .tab-body>div .signup-input {
+    margin: 10px 0px;
+}
+
+.tab-form .tab-body>div .signup-input label {
+    display: block;
+    font-size: 15px;
+}
+
+.tab-form .tab-body>div .signup-input input {
+    width: 75%;
+    margin-top: 5px;
+    font-size: 15px;
+    padding: 8px;
+}
+
+.tab-form .tab-body>div .signup-input button {
+    width: 80%;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #6BA9FF;
+    color: #144EA2;
+    font-weight: 600;
+
 }
 
 .card {
@@ -127,17 +150,6 @@ body {
 
 /* --------------PROFILE FILE STYLING ---------------- */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Roboto", sans-serif;
-}
-
-body {
-    background-image: linear-gradient(180deg, #cfe1fa, white);
-}
-
 main {
     padding: 10px;
     display: flex;
@@ -148,28 +160,42 @@ main {
 
 nav {
     width: 100%;
-    background-color: white;
+    background-color: 144EA2;
     margin-bottom: 50px;
-    border-bottom: 2px solid #4C8FED;
+    border-bottom: 2px solid var(--medium);
     padding: 5px 15px;
 }
 
 .header {
     width: 100%;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.menu a {
-    color: #4C8FED;
+.aEl {
+    color: white;
     margin: 0 16px;
     text-decoration: none;
     padding: 8px 16px;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 20px;
+    cursor: pointer;  
 }
 
+.logEl {
+    background-color: var(--light);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    margin: 0 16px;
+    text-decoration: none;
+    padding: 8px 16px;
+    font-weight: 400;
+    font-size: 20px;
+    cursor: pointer;    
+}
 
 .main-form {
     max-width: 800px;
@@ -201,7 +227,7 @@ nav {
 
 .searchEl:focus {
     outline: none;
-    border: 2px solid #4C8FED;
+    border: 2px solid var(--medium);
     padding: 15px;
 }
 
@@ -231,13 +257,13 @@ input[type="radio"] {
     height: 80%;
     width: 170px;
     cursor: pointer;
-    color: #6BA9FF;
+    color: var(--medium);
 }
 
 input[type="radio"]:checked+.radioLabel {
     border: none;
     background-color: white;
-    color: #144EA2;
+    color: var(--dark);
     box-shadow: 0px 1px 5px rgb(129, 129, 129);
 }
 
@@ -251,14 +277,14 @@ input[type="radio"]:checked+.radioLabel {
 .searchBtn {
     border: none;
     border-radius: 5px;
-    background-color: #144EA2;
+    background-color: var(--dark);
     width: 100%;
     color: white;
     font-size: 20px;
 }
 
 .searchBtn:hover {
-    background-color: #6BA9FF;
+    background-color: var(--medium);
 }
 
 .infoBoxes {
@@ -285,7 +311,7 @@ input[type="radio"]:checked+.radioLabel {
 
 .titleRow {
     padding-bottom: 10px;
-    border-bottom: 2px solid #144EA2;
+    border-bottom: 2px solid var(--dark);
     font-size: 20px;
     font-weight: bold;
 }
