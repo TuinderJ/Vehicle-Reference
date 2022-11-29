@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { default: axios } = require('axios');
+// const { default: axios } = require('axios');
 const { Vehicle, Category, Label, Value } = require('../models');
 const withAuth = require('../utils/auth');
 
