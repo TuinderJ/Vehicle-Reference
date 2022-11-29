@@ -40,4 +40,11 @@ const bulkCreateValues = async ({ values }) => {
   }
 };
 
+const bulkUpdateValues = async ({ values }) => {
+  try {
+  } catch (err) {
+    return { err };
+  }
+};
+
 module.exports = { updateValue, deleteValue, bulkCreateValues };
