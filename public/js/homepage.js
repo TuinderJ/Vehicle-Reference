@@ -1,10 +1,15 @@
 const infoSelection = document.querySelectorAll('input[name="radioEl"]');
 const searchBtn = document.querySelector('.searchBtn');
+const searchTerm = document.querySelector('#searchTerm');
 
-searchBtn.addEventListener("click", () => {
-   infoSelection.forEach(isChecked=> {
-   if(isChecked.checked)
-   console.log(isChecked.id);    
-   });
+
+searchBtn.addEventListener('click', (e) => {
+   e.preventDefault();
+   if(!searchTerm.value) return alert("Type something to search for");
+   infoSelection.forEach((option) => {
+   if (option.checked) {
+      const url = window.location.href.split("?")[0];
+      window.location.href = `${url}?${option.dataset.search}=${searchTerm.value}`
+   }    
 });
-
+});
