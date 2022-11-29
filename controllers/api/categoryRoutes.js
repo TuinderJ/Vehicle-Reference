@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Category, Label } = require('../../models');
-const withAuth = require('../../utils/auth');
+const withAuth = require('../../utils/authHelpers');
 const adminAuth = require('../../utils/adminauth');
 
 // Get all categories and the labels belonging to them
@@ -42,10 +42,7 @@ router.put('/:id', withAuth, async (req, res) => {
   try {
     const { category } = req.body;
     const id = req.params.id;
-    const changedCategory = await Category.update(
-      { category },
-      { where: { id } }
-    );
+    const changedCategory = await Category.update({ category }, { where: { id } });
 
     changedCategory[0]
       ? res.status(200).json({ id, category })
