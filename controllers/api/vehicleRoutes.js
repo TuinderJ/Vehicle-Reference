@@ -121,7 +121,9 @@ router.delete('/:id', adminAuth, async (req, res) => {
     });
     console.log(deleteVehicle);
     if (!deleteVehicle) {
-      return res.status(404).json({ message: 'No vehicle found with this id!' });
+      return res
+        .status(404)
+        .json({ message: 'No vehicle found with this id!' });
     }
     res.status(200).json(deleteVehicle);
   } catch (err) {
