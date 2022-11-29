@@ -1,43 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project 2 Template!</title>
-  <link rel="stylesheet" href="/css/style.css">
-</head>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Rush Truck Leasing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet"/>
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
 
-<body>
-  <div class="">
-    <header class="">
-      <h1>
-        <span role="img" aria-label="money"></span>
-        <a href="/">P2</a>
-      </h1>
-      <nav>
-        <!-- Conditionally render login or logout links -->
-        {{#if logged_in}}
-        <a href="/profile">profile</a> |
-        <button class="" id="logout">logout</button>
-        {{else}}
-        <a href="/login">Login</a>
-        {{/if}}
-      </nav>
-    </header>
-    <main class="">
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      
-    </footer>
-  </div>
+  <body>
+    <nav>
+      <div class='header'>
+        <div>
+          <img src='./RTC-Logo.png' alt='company logo' />
+        </div>
+        <div class='menu'>
+          <!-- Conditionally render login or logout links -->
+          {{#if logged_in}}
+            <a class='aEl' href='/profile'>PROFILE</a>
+            <a class='aEl' href='#'>EDIT TRUCK INFO</a>
+            <button class='logEl' id='logout'>LOGOUT</button>
+          {{else}}
+            <a class='logEl' href='/login'>LOGIN</a>
+          {{/if}}
+        </div>
+      </div>
+    </nav>
 
-  <!-- Render script for logged in users only -->
-  {{#if logged_in}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
-</body>
+    <div class='wrapper'>
+      <main class=''>
+        <!-- Render the sub layout -->
+        {{{body}}}
+      </main>
+      <footer>
+
+      </footer>
+    </div>
+
+    <!-- Render script for logged in users only -->
+    {{#if logged_in}}
+      <script src='/js/logout.js'></script>
+    {{/if}}
+  </body>
 
 </html>
