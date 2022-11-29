@@ -131,5 +131,5 @@ router.delete('/:id', adminAuth, async (req, res) => {
   }
 });
 
-// //Export the file.
+//Export the file.
 module.exports = router;
