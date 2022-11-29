@@ -19,8 +19,6 @@
         <button class="searchBtn">SEARCH</button>
       </div>
     </form>
-
-    {{!-- -----CARD LAYOUT----- --}}
     {{#if id}}
 <table class="infoBoxes">
   <tbody class='userInfobox' data-id={{id}}>
@@ -30,7 +28,7 @@
     {{#if unitNumber}}
       <tr class='row'>
         <td>Unit Number</td>
-        <td>{{unitNumber}}</td>
+        <td><input type="text" value={{unitNumber}}></td>
       </tr>
     {{/if}}
     {{#if customerUnitNumber}}
@@ -51,7 +49,3 @@
   {{/each}}
 </table>
 {{/if}}
-
-
-
-<script defer src="/js/homepage.js"></script>
