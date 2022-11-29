@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
       where: { 
         email: req.body.email, 
       },
-     });
+    });
 
     if (!userLogin) {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
