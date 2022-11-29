@@ -1,0 +1,33 @@
+    {{!-- -----CARD LAYOUT----- --}}
+    {{#if id}}
+<table class="infoBoxes">
+  <tbody class='userInfobox' data-id={{id}}>
+  <tr class='titleRow'>
+    <th>Details</th>
+  </tr>
+    {{#if unitNumber}}
+      <tr class='row'>
+        <td>Unit Number</td>
+        <td>{{unitNumber}}</td>
+      </tr>
+    {{/if}}
+    {{#if customerUnitNumber}}
+      <tr class='row'>
+        <td>Customer Unit Number</td>
+        <td>{{customerUnitNumber}}</td>
+      </tr>
+    {{/if}}
+    {{#if vin}}
+      <tr class='row'>
+        <td>VIN</td>
+        <td>{{vin}}</td>
+      </tr>
+    {{/if}}
+</tbody>
+  {{#each categories as |category|}}
+  {{> card}}
+  {{/each}}
+</table>
+{{/if}}
+
+{{!-- -----ADD BUTTON----- --}}
