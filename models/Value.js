@@ -19,6 +19,10 @@ Value.init(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    vehicleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   },
   {
     sequelize,

@@ -1,4 +1,5 @@
 {
   "singleQuote": true,
-  "prettier.printWidth": 250
+  "printWidth": 100,
+  "tabWidth": 2
 }
