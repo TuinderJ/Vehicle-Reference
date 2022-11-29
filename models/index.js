@@ -23,7 +23,7 @@ Value.belongsToMany(Vehicle, {
   through: ValueVehicle,
   foreignKey: 'valueId',
 });
-// Comment this for seeding
+// // Comment this for seeding
 
 module.exports = {
   User,
