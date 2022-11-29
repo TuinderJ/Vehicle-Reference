@@ -1,16 +1,15 @@
 const router = require('express').Router();
-const { Vehicle, Category, Label, Value } = require('../../models');
+const { Vehicle, Category, Label, Value, VehicleCategory } = require('../../models');
 const withAuth = require('../../utils/auth');
 const { Op } = require('sequelize');
 const adminAuth = require('../../utils/adminauth');
+const { default: axios } = require('axios');
 
 router.get('/', async (req, res) => {
   try {
     const { unitNumber, customerUnitNumber, vin, last8 } = req.query;
     if (!unitNumber && !customerUnitNumber && !vin && !last8) {
-      return res
-        .status(400)
-        .json({ message: 'Provide something to search for.' });
+      return res.status(400).json({ message: 'Provide something to search for.' });
     }
     let searchTerm = null;
     if (unitNumber) {
@@ -42,9 +41,7 @@ router.get('/', async (req, res) => {
     const vehicleData = data.map((vehicle) => vehicle.get({ plain: true }));
 
     if (!vehicleData[0]) {
-      return res
-        .status(404)
-        .json({ message: 'The vehicle searched for is not found.' });
+      return res.status(404).json({ message: 'The vehicle searched for is not found.' });
     }
 
     for (let i = 0; i < vehicleData.length; i++) {
@@ -78,56 +75,88 @@ router.get('/', async (req, res) => {
 
     res.json(vehicleData);
   } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// Create a new vehicle, only admin and logged in users.
+router.post('/', withAuth, async (req, res) => {
+  try {
+    const { unitNumber, customerUnitNumber, vin, categories, values } = req.body;
+    const newVehicle = { unitNumber, customerUnitNumber, vin };
+
+    const addedVehicle = await Vehicle.create(newVehicle);
+
+    const { id: vehicleId } = addedVehicle;
+
+    const newCategories = categories.map((categoryId) => ({ cVehicleId: vehicleId, categoryId }));
+    const newValues = values.map(({ labelId, value }) => ({ value, labelId, vehicleId }));
+
+    VehicleCategory.bulkCreate(newCategories);
+    Value.bulkCreate(newValues);
+    res.status(200).json(addedVehicle);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// TODO: Update vehicle, only admin and logged in users.
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { unitNumber, customerUnitNumber, vin, categories, values } = req.body;
+    const newVehicleData = { unitNumber, customerUnitNumber, vin };
+
+    const updateVehicle = await Vehicle.update(newVehicleData, { where: { id } });
+
+    const currentCategories = await VehicleCategory.findAll({ where: { cVehicleId: id } });
+    const currentCategoryIds = currentCategories.map(({ categoryId }) => categoryId);
+
+    const newCategories = [];
+    categories.forEach((categoryId) => {
+      if (!currentCategoryIds.includes(categoryId))
+        newCategories.push({ cVehicleId: id, categoryId });
+    });
+
+    VehicleCategory.bulkCreate(newCategories);
+
+    const valuesToUpdate = [];
+    const newValues = [];
+
+    values.forEach(({ id: valueId, labelId, value }) => {
+      valueId
+        ? valuesToUpdate.push({ id: valueId, labelId, value })
+        : newValues.push({ vehicleId: id, labelId, value });
+    });
+
+    // axios.put('/api/value/bulk', valuesToUpdate)
+    // const response = await axios.get('/');
+    // console.log(response);
+
+    updateVehicle
+      ? res.status(200).json('vehicle updated')
+      : res.status(404).json('vehicle not found or no updates');
+  } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-// //Create a new vehicle, only admin and logged in users.
-router.post('/', withAuth, async (req, res) => {
-  try {
-    // const addVehicle = await Vehicle.create(req.body);
-    // res.status(200).json(addVehicle);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-//Update vehicle, only admin and logged in users.
-router.put('/:id', withAuth, async (req, res) => {
-  try {
-    // const updateVehicle = await Vehicle.update(
-    //     req.body,
-    //     {
-    //         where: {
-    //         },
-    //     });
-    //     if (!updateVehicle) {
-    //         res.status(404).json({ message: 'No vehicle found with that id!' });
-    //         return;
-    //     }
-    //     res.status(200).json(updateVehicle);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// //Delete vehicle, ONLY ADMIN.
+// Delete vehicle, ONLY ADMIN.
 router.delete('/:id', adminAuth, async (req, res) => {
   try {
-    const id = req.params.id;
+    const { id } = req.params;
     const deleteVehicle = await Vehicle.destroy({
       where: { id },
     });
-    console.log(deleteVehicle);
-    if (!deleteVehicle) {
-      return res.status(404).json({ message: 'No vehicle found with this id!' });
-    }
-    res.status(200).json(deleteVehicle);
+
+    !deleteVehicle
+      ? res.status(404).json({ message: 'No vehicle found with this id!' })
+      : res.status(200).json(deleteVehicle);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// //Export the file.
+// Export the file.
 module.exports = router;
