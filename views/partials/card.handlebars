@@ -1,0 +1,14 @@
+
+<tbody class='userInfobox'>
+  <tr class='titleRow'>
+    <th>{{category}}</th>
+  </tr>
+  {{#each labels as |label|}}
+    {{#if label.values}}
+      <tr class='row'>
+        <td>{{label.label}}</td>
+        <td>{{label.values.[0].value}}</td>
+      </tr>
+    {{/if}}
+  {{/each}}
+</tbody>
