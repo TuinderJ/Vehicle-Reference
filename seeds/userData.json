@@ -2,31 +2,26 @@
   {
     "name": "Joshua Tuinder",
     "email": "josh@fake.com",
-    "password": "password12345",
-    "admin": true
+    "password": "password12345"
   },
   {
     "name": "Angi Adema",
     "email": "angi@fake.com",
-    "password": "password12345",
-    "admin": true
+    "password": "password12345"
   },
   {
     "name": "Hugo Garcia",
     "email": "hugo@fake.com",
-    "password": "password12345",
-    "admin": true
+    "password": "password12345"
   },
   {
     "name": "Sean Grant",
     "email": "sean@fake.com",
-    "password": "password12345",
-    "admin": true
+    "password": "password12345"
   },
   {
     "name": "Dummy",
     "email": "dummy@fake.com",
-    "password": "password12345",
-    "admin": false
+    "password": "password12345"
   }
 ]

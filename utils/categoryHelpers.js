@@ -1,10 +1,11 @@
-const { Category, Label } = require('../../models');
-const { isLoggedIn, isAdmin } = require('./authHelpers');
+const { Category, Label } = require('../models');
+const { isLoggedIn } = require('./authHelpers');
 
-const getCategory = async () => {
-  if (!isLoggedIn()) return { loggedIn: false };
+const getCategory = async ({ req }) => {
+  if (!isLoggedIn({ req })) return { loggedIn: false };
   try {
-    const categoryData = await Category.findAll({
+    const data = await Category.findAll({
+      order: [['id', 'ASC']],
       include: {
         model: Label,
         attributes: {
@@ -12,6 +13,9 @@ const getCategory = async () => {
         },
       },
     });
+
+    const categoryData = data.map((category) => category.get({ plain: true }));
+
     return categoryData;
   } catch (err) {
     console.log(err);
@@ -55,7 +59,7 @@ const updateCategory = async () => {
 };
 
 const deleteCategory = async () => {
-  if (!isAdmin()) return { loggedIn: false };
+  if (!isLoggedIn({ req })) return { loggedIn: false };
   try {
     const id = req.params.id;
     const deletedCategory = await Category.destroy({ where: { id } });

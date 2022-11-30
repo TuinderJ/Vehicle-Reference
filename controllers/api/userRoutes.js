@@ -11,9 +11,7 @@ router.post('/', async (req, res) => {
       req.session.logged_in = true;
       req.session.username = userData.username;
 
-      userData.admin
-        ? (req.session.admin = true)
-        : (req.session.admin = false);
+      userData.admin ? (req.session.admin = true) : (req.session.admin = false);
 
       res.status(200).json(userData);
     });
@@ -25,9 +23,9 @@ router.post('/', async (req, res) => {
 //Create login route for the admin and regular logged in user.
 router.post('/login', async (req, res) => {
   try {
-    const userLogin = await User.findOne({ 
-      where: { 
-        email: req.body.email, 
+    const userLogin = await User.findOne({
+      where: {
+        email: req.body.email,
       },
     });
 
@@ -48,18 +46,19 @@ router.post('/login', async (req, res) => {
       req.session.logged_in = true;
       req.session.username = userLogin.username;
 
-      res.json({ userLogin, message: 'You are now logged in!' });
+      if (userLogin.admin) req.session.admin = true;
+
+      res.status(200).json({ user: userLogin, message: 'You are now logged in!' });
     });
   } catch (err) {
+    console.log(err);
     res.status(400).json({ message: 'Incorrect email or password, please try again' });
   }
 });
 
 //User log out.
 router.post('/logout', (req, res) => {
-  req.session.logged_in
-    ? req.session.destroy(() => res.status(204).end())
-    : res.status(404).end();
+  req.session.logged_in ? req.session.destroy(() => res.status(204).end()) : res.status(404).end();
 });
 
 //Export the routes.

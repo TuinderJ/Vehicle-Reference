@@ -1,36 +1,48 @@
 const router = require('express').Router();
-// const { default: axios } = require('axios');
-const { Vehicle, Category, Label, Value } = require('../models');
-const withAuth = require('../utils/auth');
+const { getVehicle } = require('../utils/vehicleHelpers');
+const { getCategory } = require('../utils/categoryHelpers');
 
 router.get('/', async (req, res) => {
   try {
     const { unitNumber, customerUnitNumber, vin, last8 } = req.query;
     if (unitNumber || customerUnitNumber || vin || last8) {
-      // AXIOS REQUEST
-      const domain = false || 'http://localhost:3001';
-      const data = await axios.get(`${domain}/api/vehicle`, { params: req.query });
-      console.log(data);
-      res.render('homepage', data.data[0]);
+      const data = await getVehicle({ unitNumber, customerUnitNumber, vin, last8 });
+
+      if (typeof data === 'string') {
+        res.render('homepage', { error: 'This vehicle was not found.' });
+      } else {
+        res.render('homepage', { data, logged_in: req.session.logged_in });
+      }
     } else {
-      res.render('homepage', {
-        logged_in: req.session.logged_in,
-      });
+      res.render('homepage', { logged_in: req.session.logged_in });
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get('/login', (req, res) => {
+router.get('/login', async (req, res) => {
   try {
-    if (req.session.logged_in) {
-      res.redirect('/');
-      return;
-    }
     res.render('login');
   } catch (err) {
-    res.status(500).json(err);
+    console.log(err);
+    res.json({ err });
+  }
+});
+
+router.get('/add', async (req, res) => {
+  try {
+    const { unitNumber, customerUnitNumber, vin, last8 } = req.query;
+    const categories = await getCategory({ req });
+    if (categories.loggedIn === false) res.redirect('/');
+    if (unitNumber || customerUnitNumber || vin || last8) {
+      res.render('add-vehicle', { edit: true, categories, logged_in: req.session.logged_in });
+    } else {
+      res.render('add-vehicle', { categories, logged_in: req.session.logged_in });
+    }
+  } catch (err) {
+    console.log(err);
   }
 });
 
