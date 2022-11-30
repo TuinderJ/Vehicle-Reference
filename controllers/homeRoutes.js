@@ -6,7 +6,7 @@ router.get('/', async (req, res) => {
     const { unitNumber, customerUnitNumber, vin, last8 } = req.query;
     if (unitNumber || customerUnitNumber || vin || last8) {
       const data = await getVehicle({ unitNumber, customerUnitNumber, vin, last8 });
-      console.log(data);
+
       if (typeof data === 'string') {
         res.render('homepage', { error: 'This vehicle was not found.' });
       } else {
@@ -23,8 +23,14 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/login', (res, req) => {
-  res.render('login');
+router.get('/login', async (req, res) => {
+  try {
+    console.log('Hello. I made it!!!');
+    res.render('login');
+  } catch (err) {
+    console.log(err);
+    res.json({ message: 'bad' });
+  }
 });
 
 module.exports = router;

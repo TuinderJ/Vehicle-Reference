@@ -1,5 +1,6 @@
 const { Vehicle, Category, Value, Label, VehicleCategory } = require('../models');
 const { isLoggedIn, isAdmin } = require('./authHelpers');
+const { bulkCreateValues, bulkUpdateValues } = require('./valueHelpers');
 
 const getVehicle = async ({ unitNumber, customerUnitNumber, vin, last8 }) => {
   try {
@@ -118,10 +119,8 @@ const updateVehicle = async ({ id, unitNumber, customerUnitNumber, vin, categori
         : newValues.push({ vehicleId: id, labelId, value });
     });
 
-    // axios.put('/api/value/bulk', valuesToUpdate)
-    // const response = await axios.get('/');
-    // console.log(response);
     await bulkCreateValues(newValues);
+    await bulkUpdateValues(valuesToUpdate);
 
     if (updateVehicle) {
       return 'vehicle updated';
@@ -129,7 +128,6 @@ const updateVehicle = async ({ id, unitNumber, customerUnitNumber, vin, categori
       return 'vehicle not found or no updates';
     }
   } catch (err) {
-    console.log(err);
     return { err };
   }
 };

@@ -1,6 +1,7 @@
 const { Value } = require('../models');
 
 const updateValue = async ({ id, value }) => {
+  if (!isLoggedIn()) return { loggedIn: false };
   try {
     const updatedvalue = await Value.update({ value }, { where: { id } });
 
@@ -15,6 +16,7 @@ const updateValue = async ({ id, value }) => {
 };
 
 const deleteValue = async ({ id }) => {
+  if (!isAdmin()) return { loggedIn: false };
   try {
     const deletedvalue = await Value.destroy({ where: { id } });
     if (deletedvalue) {
@@ -28,6 +30,7 @@ const deleteValue = async ({ id }) => {
 };
 
 const bulkCreateValues = async ({ values }) => {
+  if (!isLoggedIn()) return { loggedIn: false };
   try {
     const newValues = await Value.bulkCreate(values);
     if (newValues[0]) {
@@ -41,10 +44,14 @@ const bulkCreateValues = async ({ values }) => {
 };
 
 const bulkUpdateValues = async ({ values }) => {
+  if (!isLoggedIn()) return { loggedIn: false };
   try {
+    values.forEach(({ id, value }) => {
+      Value.update({ value }, { where: { id } });
+    });
   } catch (err) {
     return { err };
   }
 };
 
-module.exports = { updateValue, deleteValue, bulkCreateValues };
+module.exports = { updateValue, deleteValue, bulkCreateValues, bulkUpdateValues };

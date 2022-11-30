@@ -25,12 +25,9 @@ router.post('/', withAuth, async (req, res) => {
   // try {
   //   const { category, labels } = req.body;
   //   const addedCategory = await Category.create({ category });
-
   //   const { id: categoryId } = addedCategory;
   //   const newLabels = labels.map((label) => ({ categoryId, label }));
-
   //   const addedLabels = await Label.bulkCreate(newLabels);
-
   //   res.status(200).json({ addedCategory, addedLabels });
   // } catch (err) {
   //   res.status(500).json(err);
@@ -44,12 +41,12 @@ router.put('/:id', withAuth, async (req, res) => {
     const id = req.params.id;
     const changedCategory = await Category.update({ category }, { where: { id } });
 
-  //   changedCategory[0]
-  //     ? res.status(200).json({ id, category })
-  //     : res.status(404).json('category not found or no changes made');
-  // } catch (err) {
-  //   res.status(500).json(err);
-  // }
+    //   changedCategory[0]
+    //     ? res.status(200).json({ id, category })
+    //     : res.status(404).json('category not found or no changes made');
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 // Delete category, ONLY ADMIN.
