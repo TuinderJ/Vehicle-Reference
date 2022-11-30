@@ -2,7 +2,7 @@
     --light: #6BA9FF;
     --medium: #4C8FED;
     --dark: #144EA2;
-  }
+}
 * {
     margin: 0px;
     padding: 0px;
@@ -148,7 +148,11 @@ body {
     display: flex;
     justify-content: center;
 }
-
+.card-body {
+    font-size: 1.4rem;
+    text-align: center;
+    font-weight: bold;
+}
 
 /* --------------PROFILE FILE STYLING ---------------- */
 
