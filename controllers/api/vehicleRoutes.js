@@ -3,7 +3,7 @@ const { Vehicle, Category, Label, Value, VehicleCategory } = require('../../mode
 const withAuth = require('../../utils/authHelpers');
 const { Op } = require('sequelize');
 const adminAuth = require('../../utils/adminauth');
-const { default: axios } = require('axios');
+// const { default: axios } = require('axios');
 
 router.get('/', async (req, res) => {});
 

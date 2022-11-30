@@ -23,31 +23,35 @@ router.post('/', async (req, res) => {
 //Create login route for the admin and regular logged in user.
 router.post('/login', async (req, res) => {
   try {
-    const userData = await User.findOne({ where: { email: req.body.email } });
+    const userLogin = await User.findOne({
+      where: {
+        email: req.body.email,
+      },
+    });
 
     if (!userData) {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
 
-    // const validPassword = userData.checkPassword(req.body.password);
+    const validPassword = userLogin.checkPassword(req.body.password);
 
-    const validPassword = true; //TODO: REMOVE
     if (!validPassword) {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
 
     req.session.save(() => {
-      req.session.user_id = userData.id;
+      req.session.user_id = userLogin.id;
       req.session.logged_in = true;
+      req.session.username = userLogin.username;
 
       if (userData.admin) req.session.admin = true;
 
       res.status(200).json({ user: userData, message: 'You are now logged in!' });
     });
   } catch (err) {
-    res.status(400).json(err);
+    res.status(400).json({ message: 'Incorrect email or password, please try again' });
   }
 });
 
