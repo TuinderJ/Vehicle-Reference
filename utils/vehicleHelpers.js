@@ -1,5 +1,5 @@
 const { Vehicle, Category, Value, Label, VehicleCategory } = require('../models');
-const { isLoggedIn, isAdmin } = require('./authHelpers');
+const { isLoggedIn } = require('./authHelpers');
 const { bulkCreateValues, bulkUpdateValues } = require('./valueHelpers');
 
 const getVehicle = async ({ unitNumber, customerUnitNumber, vin, last8 }) => {
@@ -92,8 +92,16 @@ const createVehicle = async ({ unitNumber, customerUnitNumber, vin, categories, 
 };
 
 // TODO: fix
-const updateVehicle = async ({ id, unitNumber, customerUnitNumber, vin, categories, values }) => {
-  if (!isLoggedIn()) return { loggedIn: false };
+const updateVehicle = async ({
+  req,
+  id,
+  unitNumber,
+  customerUnitNumber,
+  vin,
+  categories,
+  values,
+}) => {
+  if (!isLoggedIn({ req })) return { loggedIn: false };
   try {
     const newVehicleData = { unitNumber, customerUnitNumber, vin };
 
@@ -119,8 +127,9 @@ const updateVehicle = async ({ id, unitNumber, customerUnitNumber, vin, categori
         : newValues.push({ vehicleId: id, labelId, value });
     });
 
-    await bulkCreateValues(newValues);
-    await bulkUpdateValues(valuesToUpdate);
+    const created = await bulkCreateValues({ req, newValues });
+    const updated = await bulkUpdateValues({ req, valuesToUpdate });
+    console.log(created, updated);
 
     if (updateVehicle) {
       return 'vehicle updated';
@@ -128,12 +137,13 @@ const updateVehicle = async ({ id, unitNumber, customerUnitNumber, vin, categori
       return 'vehicle not found or no updates';
     }
   } catch (err) {
+    console.log(err);
     return { err };
   }
 };
 
 const deleteVehicle = async ({ id }) => {
-  if (!isAdmin()) return { loggedIn: false };
+  if (!isLoggedIn({ req })) return { loggedIn: false };
   try {
     const deleteVehicle = await Vehicle.destroy({
       where: { id },

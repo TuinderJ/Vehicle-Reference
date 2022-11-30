@@ -7,14 +7,13 @@ let tabBodyElements = tab.querySelectorAll('.tab-body > div');
 for (let i = 0; i < tabHeaderElements.length; i++) {
   tabHeaderElements[i].addEventListener('click', function () {
     tabHeader.querySelector('.active').classList.remove('active');
-    tabBodyElements[i].classList.add('active');
+    tabHeaderElements[i].classList.add('active');
     tabBody.querySelector('.active').classList.remove('active');
     tabBodyElements[i].classList.add('active');
   });
 }
 
 const loginFormHandler = async (event) => {
-  
   event.preventDefault();
 
   // Collect values from the login form

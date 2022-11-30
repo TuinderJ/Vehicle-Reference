@@ -1,5 +1,5 @@
 const { Label } = require('../models');
-const { isAdmin } = require('./authHelpers');
+const { isLoggedIn } = require('./authHelpers');
 
 const getLabel = async ({ label, id }) => {
   try {
@@ -16,7 +16,7 @@ const getLabel = async ({ label, id }) => {
 };
 
 const deleteLabel = async ({ id }) => {
-  if (!isAdmin()) return { loggedIn: false };
+  if (!isLoggedIn({ req })) return { loggedIn: false };
   try {
     const deletedLabel = await Label.destroy({ where: { id } });
     if (deletedLabel) {

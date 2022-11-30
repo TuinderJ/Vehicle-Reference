@@ -79,6 +79,9 @@ body {
 
 .tab-form .tab-body > div .login-input {
   margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tab-form .tab-body > div .login-input label {
@@ -108,6 +111,9 @@ body {
 
 .tab-form .tab-body > div .signup-input {
   margin: 10px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tab-form .tab-body > div .signup-input label {
@@ -323,4 +329,18 @@ input[type='radio']:checked + .radioLabel {
   padding-top: 5px;
   display: inline-flex;
   justify-content: space-between;
+}
+
+#submit-button {
+  border: none;
+  border-radius: 5px;
+  background-color: #144ea2;
+  padding: 1rem;
+  color: white;
+  font-size: 15px;
+}
+
+#submit-button:hover {
+  background-color: #6ba9ff;
+  cursor: pointer;
 }

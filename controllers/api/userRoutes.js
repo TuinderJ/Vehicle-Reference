@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
       },
     });
 
-    if (!userData) {
+    if (!userLogin) {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
@@ -46,11 +46,12 @@ router.post('/login', async (req, res) => {
       req.session.logged_in = true;
       req.session.username = userLogin.username;
 
-      if (userData.admin) req.session.admin = true;
+      if (userLogin.admin) req.session.admin = true;
 
-      res.status(200).json({ user: userData, message: 'You are now logged in!' });
+      res.status(200).json({ user: userLogin, message: 'You are now logged in!' });
     });
   } catch (err) {
+    console.log(err);
     res.status(400).json({ message: 'Incorrect email or password, please try again' });
   }
 });

@@ -1,4 +1,5 @@
 const { Value } = require('../models');
+const { isLoggedIn } = require('../utils/authHelpers');
 
 const updateValue = async ({ id, value }) => {
   if (!isLoggedIn()) return { loggedIn: false };
@@ -16,7 +17,7 @@ const updateValue = async ({ id, value }) => {
 };
 
 const deleteValue = async ({ id }) => {
-  if (!isAdmin()) return { loggedIn: false };
+  if (!isLoggedIn({ req })) return { loggedIn: false };
   try {
     const deletedvalue = await Value.destroy({ where: { id } });
     if (deletedvalue) {
@@ -29,12 +30,13 @@ const deleteValue = async ({ id }) => {
   }
 };
 
-const bulkCreateValues = async ({ values }) => {
-  if (!isLoggedIn()) return { loggedIn: false };
+const bulkCreateValues = async ({ req, newValues }) => {
+  if (!isLoggedIn({ req })) return { loggedIn: false };
   try {
-    const newValues = await Value.bulkCreate(values);
-    if (newValues[0]) {
-      return newValues;
+    if (!newValues) return;
+    const createdValues = await Value.bulkCreate(newValues);
+    if (createdValues[0]) {
+      return createdValues;
     } else {
       return '';
     }
@@ -43,10 +45,11 @@ const bulkCreateValues = async ({ values }) => {
   }
 };
 
-const bulkUpdateValues = async ({ values }) => {
-  if (!isLoggedIn()) return { loggedIn: false };
+const bulkUpdateValues = async ({ req, valuesToUpdate }) => {
+  if (!isLoggedIn({ req })) return { loggedIn: false };
   try {
-    values.forEach(({ id, value }) => {
+    if (!valuesToUpdate) return;
+    valuesToUpdate.forEach(({ id, value }) => {
       Value.update({ value }, { where: { id } });
     });
   } catch (err) {

@@ -21,32 +21,32 @@
     </form>
 
     {{!-- -----CARD LAYOUT----- --}}
-    {{#if id}}
+    {{#if data.id}}
 <table class="infoBoxes">
-  <tbody class='userInfobox' data-id={{id}}>
+  <tbody class='userInfobox' data-id={{data.id}}>
   <tr class='titleRow'>
     <th>Details</th>
   </tr>
-    {{#if unitNumber}}
+    {{#if data.unitNumber}}
       <tr class='row'>
         <td>Unit Number</td>
-        <td>{{unitNumber}}</td>
+        <td>{{data.unitNumber}}</td>
       </tr>
     {{/if}}
-    {{#if customerUnitNumber}}
+    {{#if data.customerUnitNumber}}
       <tr class='row'>
         <td>Customer Unit Number</td>
-        <td>{{customerUnitNumber}}</td>
+        <td>{{data.customerUnitNumber}}</td>
       </tr>
     {{/if}}
-    {{#if vin}}
+    {{#if data.vin}}
       <tr class='row'>
         <td>VIN</td>
-        <td>{{vin}}</td>
+        <td>{{data.vin}}</td>
       </tr>
     {{/if}}
 </tbody>
-  {{#each categories as |category|}}
+  {{#each data.categories as |category|}}
   {{> card}}
   {{/each}}
 </table>

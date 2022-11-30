@@ -22,7 +22,11 @@
         <div class='menu'>
           <!-- Conditionally render login or logout links -->
           {{#if logged_in}}
-            <a class='aEl' href='#'>EDIT TRUCK INFO</a>
+            {{#if data.id}}
+              <a class='aEl'>Delete Selected Vehicle</a>
+              <a class='aEl' id='edit' href='#'>Edit Selected Vehicle</a>
+            {{/if}}
+            <a class='aEl' href='/add'>Add New Vehicle</a>
             <button class='logEl' id='logout'>LOGOUT</button>
           {{else}}
             <a class='logEl' href='/login'>LOGIN</a>

@@ -1,7 +1,6 @@
 const router = require('express').Router();
-const { Category, Label } = require('../../models');
+const { Category } = require('../../models');
 const withAuth = require('../../utils/authHelpers');
-const adminAuth = require('../../utils/adminauth');
 
 // Get all categories and the labels belonging to them
 router.get('/', async (req, res) => {
@@ -50,7 +49,7 @@ router.put('/:id', withAuth, async (req, res) => {
 });
 
 // Delete category, ONLY ADMIN.
-router.delete('/:id', adminAuth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   // try {
   //   const id = req.params.id;
   //   const deletedCategory = await Category.destroy({ where: { id } });

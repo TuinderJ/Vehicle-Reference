@@ -1,36 +1,35 @@
-    {{!-- -----CARD LAYOUT----- --}}
-    {{#if id}}
+{{!-- -----CARD LAYOUT----- --}}
 <form id="new-card-form" class="infoBoxes">
-  <tbody class='userInfobox' data-id={{id}}>
+  <table>
+  <tbody class='userInfobox' id="vehicle-id">
   <tr class='titleRow'>
     <th>Details</th>
   </tr>
-    {{#if unitNumber}}
       <tr class='row'>
         <td>Unit Number</td>
         <td><input name="unit-num" type="text"></td>
       </tr>
-    {{/if}}
-    {{#if customerUnitNumber}}
       <tr class='row'>
         <td>Customer Unit Number</td>
         <td><input name="customer-unit-num" type="text"></td>
       </tr>
-    {{/if}}
-    {{#if vin}}
       <tr class='row'>
         <td>VIN</td>
         <td><input name="vin-input" type="text"></td>
       </tr>
-    {{/if}}
 </tbody>
   {{#each categories as |category|}}
-  {{> card}}
+  {{> new-vehicle-card}}
   {{/each}}
+  </table>
 </form>
-{{/if}}
 
 {{!-- -----ADD BUTTON----- --}}
-<button type="submit" class="">Add Vehicle</button>
 
-<script src="/public/js/add-vehicle.js"></script>
+{{#if edit}}
+  <script defer src="/js/edit-vehicle.js"></script>
+  <button type="submit" name="submit-button" id="submit-button" class="">Submit Changes</button>
+{{else}}
+  <button type="submit" name="submit-button" id="submit-button" class="">Add Vehicle</button>
+  <script defer src="/js/add-vehicle.js"></script>
+{{/if}}
