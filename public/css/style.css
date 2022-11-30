@@ -145,6 +145,11 @@ body {
   display: flex;
   justify-content: center;
 }
+.card-body {
+  font-size: 1.4rem;
+  text-align: center;
+  font-weight: bold;
+}
 
 /* --------------PROFILE FILE STYLING ---------------- */
 

@@ -14,6 +14,7 @@ for (let i = 0; i < tabHeaderElements.length; i++) {
 }
 
 const loginFormHandler = async (event) => {
+  
   event.preventDefault();
 
   // Collect values from the login form

@@ -7,9 +7,9 @@ searchBtn.addEventListener('click', (e) => {
    e.preventDefault();
    if(!searchTerm.value) return alert("Type something to search for");
    infoSelection.forEach((option) => {
-    if (option.checked) {
+   if (option.checked) {
       const url = window.location.href.split("?")[0];
       window.location.href = `${url}?${option.dataset.search}=${searchTerm.value}`
-    }    
-  });
+   }    
+});
 });
