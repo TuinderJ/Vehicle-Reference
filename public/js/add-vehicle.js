@@ -13,7 +13,7 @@ const addCardHandler = async (event) => {
             vin
         })
     });
-    document.location.replace('/');
+    document.location.replace('/homepage');
 }
 
 document.querySelector('new-card-form').addEventListener('submit', addCardHandler);
