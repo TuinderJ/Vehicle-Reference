@@ -40,7 +40,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete vehicle, ONLY ADMIN.
-// router.delete('/:id', async (req, res) => {});
+router.delete('/:id', async (req, res) => {});
 
 // Export the file.
 module.exports = router;
