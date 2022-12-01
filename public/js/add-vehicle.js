@@ -26,15 +26,14 @@ const addCardHandler = async (e) => {
     if (containsValues) vehicle.categories.push(categoryId);
   }
 
-  console.log(vehicle);
-
-  await fetch(`api/vehicle/`, {
+  const response = await fetch(`api/vehicle/`, {
     method: 'POST',
     headers: { 'Content-type': 'application/json' },
     body: JSON.stringify(vehicle),
   });
+  const message = await response.json();
 
-  document.location.replace(`/?vin=${vehicle.vin}`);
+  message === 'good' ? document.location.replace(`/?vin=${vehicle.vin}`) : alert(message);
 };
 
 document.querySelector('#submit-button').addEventListener('click', addCardHandler);

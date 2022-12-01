@@ -86,7 +86,6 @@ const createVehicle = async ({ req, unitNumber, customerUnitNumber, vin, categor
     Value.bulkCreate(newValues);
     return addedVehicle;
   } catch (err) {
-    console.log(err);
     return { err };
   }
 };

@@ -19,8 +19,15 @@ router.get('/', async (req, res) => {
 // Create a new vehicle, only admin and logged in users.
 router.post('/', async (req, res) => {
   const { unitNumber, customerUnitNumber, vin, categories, values } = req.body;
-  createVehicle({ req, unitNumber, customerUnitNumber, vin, categories, values });
-  res.json('good');
+  const response = await createVehicle({
+    req,
+    unitNumber,
+    customerUnitNumber,
+    vin,
+    categories,
+    values,
+  });
+  response.err ? res.json(response.err.errors[0].message) : res.json('good');
 });
 
 // Update vehicle, only admin and logged in users.
