@@ -12,10 +12,10 @@ Vehicle.hasMany(Value, { foreignKey: 'vehicleId' });
 Value.belongsTo(Vehicle);
 
 // Comment this for seeding
-// Vehicle.belongsToMany(Category, {
-//   through: VehicleCategory,
-//   foreignKey: 'cVehicleId',
-// });
+Vehicle.belongsToMany(Category, {
+  through: VehicleCategory,
+  foreignKey: 'cVehicleId',
+});
 // Comment this for seeding
 
 module.exports = {
