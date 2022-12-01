@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
       };
 
       const joke = await axios.request(options);
-
+      
       jokeObj = {
         joke: joke.data.joke,
         setup: joke.data.setup,
