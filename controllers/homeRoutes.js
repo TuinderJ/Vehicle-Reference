@@ -10,11 +10,11 @@ router.get('/', async (req, res) => {
     try {
       const options = {
         method: 'GET',
-        url: 'https://jokeapi-v2.p.rapidapi.com/joke/Any',
+        url: 'https://jokeapi-v2.p.rapidapi.com/joke/Programming',
         params: {
           format: 'json',
           idRange: '0-150',
-          blacklistFlags: 'nsfw,racist',
+          blacklistFlags: 'nsfw,religious,political,racist,sexist,explicit',
           'safe-mode': 'safe-mode',
         },
         headers: {
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
       };
 
       const joke = await axios.request(options);
-
+      console.log(joke);
       jokeObj = {
         joke: joke.data.joke,
         setup: joke.data.setup,
