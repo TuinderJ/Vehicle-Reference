@@ -23,7 +23,7 @@
           <!-- Conditionally render login or logout links -->
           {{#if logged_in}}
             {{#if data.id}}
-              <a class='aEl'>Delete Selected Vehicle</a>
+              <a class='aEl' id='delete'>Delete Selected Vehicle</a>
               <a class='aEl' id='edit' href='#'>Edit Selected Vehicle</a>
             {{/if}}
             <a class='aEl' href='/add'>Add New Vehicle</a>

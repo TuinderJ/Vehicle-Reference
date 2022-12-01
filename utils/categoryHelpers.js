@@ -18,7 +18,6 @@ const getCategory = async ({ req }) => {
 
     return categoryData;
   } catch (err) {
-    console.log(err);
     return 'No category found';
   }
 };
@@ -36,7 +35,6 @@ const createCategory = async () => {
 
     return { addedCategory, addedLabels };
   } catch (err) {
-    console.log(err);
     return 'No category found';
   }
 };
@@ -65,7 +63,7 @@ const deleteCategory = async () => {
     const deletedCategory = await Category.destroy({ where: { id } });
 
     if (deletedCategory) {
-      return 'deletedCategory';
+      return deletedCategory;
     } else {
       return 'Category not found';
     }
