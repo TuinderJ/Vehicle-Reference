@@ -1,64 +1,66 @@
-<main>
-    <form action="" class="main-form">
-      <div class="inputEl">
-        <input type="text" class="searchEl" id="searchTerm" />
-      </div>
-      <div class="radiosMainbox">
-        <input type="radio" name="radioEl" data-search="unitNumber" id="Unit" checked />
-        <label for="Unit" class="radioLabel">Unit<br />Number</label>
-        <input type="radio" name="radioEl" data-search="customerUnitNumber" id="Customer" />
-        <label for="Customer" class="radioLabel">
-          Customer Unit<br />Number</label
-        >
-        <input type="radio" name="radioEl" data-search="vin" id="VIN" />
-        <label for="VIN" class="radioLabel">VIN</label>
-        <input type="radio" name="radioEl" data-search="last8" id="Last8" />
-        <label for="Last8" class="radioLabel">Last 8<br />of VIN</label>
-      </div>
-      <div class="buttonDiv">
-        <button class="searchBtn">SEARCH</button>
-      </div>
-    </form>
-
-    {{!-- JOKE --}}
-
+  {{!-- JOKE --}}
+  <section class="jokeEl">
     <div>
       <h1>{{jokeObj.setup}}</h1>
       <p>{{jokeObj.delivery}}</p>
     </div>
+  </section>
 
-    {{!-- -----CARD LAYOUT----- --}}
-    {{#if data.id}}
-<table class="infoBoxes">
-  <tbody class='userInfobox' data-id={{data.id}}>
-  <tr class='titleRow'>
-    <th>Details</th>
-  </tr>
-    {{#if data.unitNumber}}
+  {{!-- ---SEARCH BOX--- --}}
+<main>
+  <form action="" class="main-form">
+    <div class="inputEl">
+      <input type="text" class="searchEl" id="searchTerm" />
+    </div>
+    <div class="radiosMainbox">
+      <input type="radio" name="radioEl" data-search="unitNumber" id="Unit" checked />
+      <label for="Unit" class="radioLabel">Unit<br />Number</label>
+      <input type="radio" name="radioEl" data-search="customerUnitNumber" id="Customer" />
+      <label for="Customer" class="radioLabel">
+        Customer Unit<br />Number</label>
+      <input type="radio" name="radioEl" data-search="vin" id="VIN" />
+      <label for="VIN" class="radioLabel">VIN</label>
+      <input type="radio" name="radioEl" data-search="last8" id="Last8" />
+      <label for="Last8" class="radioLabel">Last 8<br />of VIN</label>
+    </div>
+    <div class="buttonDiv">
+      <button class="searchBtn">SEARCH</button>
+    </div>
+  </form>
+
+
+  {{!-- -----CARD LAYOUT----- --}}
+  {{#if data.id}}
+  <table class="infoBoxes">
+    <tbody class='userInfobox' data-id={{data.id}}>
+      <tr class='titleRow'>
+        <th>Details</th>
+      </tr>
+      {{#if data.unitNumber}}
       <tr class='row'>
         <td>Unit Number</td>
         <td>{{data.unitNumber}}</td>
       </tr>
-    {{/if}}
-    {{#if data.customerUnitNumber}}
+      {{/if}}
+      {{#if data.customerUnitNumber}}
       <tr class='row'>
         <td>Customer Unit Number</td>
         <td>{{data.customerUnitNumber}}</td>
       </tr>
-    {{/if}}
-    {{#if data.vin}}
+      {{/if}}
+      {{#if data.vin}}
       <tr class='row'>
         <td>VIN</td>
         <td>{{data.vin}}</td>
       </tr>
-    {{/if}}
-</tbody>
-  {{#each data.categories as |category|}}
-  {{> card}}
-  {{/each}}
-</table>
-{{/if}}
+      {{/if}}
+    </tbody>
+    {{#each data.categories as |category|}}
+    {{> card}}
+    {{/each}}
+  </table>
+  {{/if}}
 
 
 
-<script defer src="/js/homepage.js"></script>
+  <script defer src="/js/homepage.js"></script>
