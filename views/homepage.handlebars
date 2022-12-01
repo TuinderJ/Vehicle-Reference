@@ -21,36 +21,39 @@
     </form>
 
     {{!-- -----CARD LAYOUT----- --}}
+    {{#if error}}
+      <p>{{error}}</p>
+    {{/if}}
     {{#if data.id}}
-<table class="infoBoxes">
-  <tbody class='userInfobox' data-id={{data.id}}>
-  <tr class='titleRow'>
-    <th>Details</th>
-  </tr>
-    {{#if data.unitNumber}}
-      <tr class='row'>
-        <td>Unit Number</td>
-        <td>{{data.unitNumber}}</td>
+    <table class="infoBoxes">
+      <tbody class='userInfobox' id="vehicle-id" data-id={{data.id}}>
+      <tr class='titleRow'>
+        <th>Details</th>
       </tr>
+        {{#if data.unitNumber}}
+          <tr class='row'>
+            <td>Unit Number</td>
+            <td>{{data.unitNumber}}</td>
+          </tr>
+        {{/if}}
+        {{#if data.customerUnitNumber}}
+          <tr class='row'>
+            <td>Customer Unit Number</td>
+            <td>{{data.customerUnitNumber}}</td>
+          </tr>
+        {{/if}}
+        {{#if data.vin}}
+          <tr class='row'>
+            <td>VIN</td>
+            <td>{{data.vin}}</td>
+          </tr>
+        {{/if}}
+    </tbody>
+      {{#each data.categories as |category|}}
+      {{> card}}
+      {{/each}}
+    </table>
     {{/if}}
-    {{#if data.customerUnitNumber}}
-      <tr class='row'>
-        <td>Customer Unit Number</td>
-        <td>{{data.customerUnitNumber}}</td>
-      </tr>
-    {{/if}}
-    {{#if data.vin}}
-      <tr class='row'>
-        <td>VIN</td>
-        <td>{{data.vin}}</td>
-      </tr>
-    {{/if}}
-</tbody>
-  {{#each data.categories as |category|}}
-  {{> card}}
-  {{/each}}
-</table>
-{{/if}}
 
 
 

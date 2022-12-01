@@ -9,7 +9,10 @@ router.get('/', async (req, res) => {
       const data = await getVehicle({ unitNumber, customerUnitNumber, vin, last8 });
 
       if (typeof data === 'string') {
-        res.render('homepage', { error: 'This vehicle was not found.' });
+        res.render('homepage', {
+          error: 'This vehicle was not found.',
+          logged_in: req.session.logged_in,
+        });
       } else {
         res.render('homepage', { data, logged_in: req.session.logged_in });
       }

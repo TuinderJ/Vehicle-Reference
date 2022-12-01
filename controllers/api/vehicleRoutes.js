@@ -1,6 +1,11 @@
 const router = require('express').Router();
 const withAuth = require('../../utils/authHelpers');
-const { getVehicle, createVehicle, updateVehicle } = require('../../utils/vehicleHelpers');
+const {
+  getVehicle,
+  createVehicle,
+  updateVehicle,
+  deleteVehicle,
+} = require('../../utils/vehicleHelpers');
 
 router.get('/', async (req, res) => {
   try {
@@ -14,7 +19,7 @@ router.get('/', async (req, res) => {
 
 // Create a new vehicle, only admin and logged in users.
 router.post('/', async (req, res) => {
-  createVehicle();
+  createVehicle({ req });
 });
 
 // Update vehicle, only admin and logged in users.
@@ -40,7 +45,10 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete vehicle, ONLY ADMIN.
-router.delete('/:id', async (req, res) => {});
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  deleteVehicle({ id, req });
+});
 
 // Export the file.
 module.exports = router;

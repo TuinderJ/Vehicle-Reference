@@ -1,6 +1,8 @@
 const infoSelection = document.querySelectorAll('input[name="radioEl"]');
 const searchBtn = document.querySelector('.searchBtn');
 const searchTerm = document.querySelector('#searchTerm');
+const deleteButton = document.querySelector('#delete');
+const editButton = document.querySelector('#edit');
 
 searchBtn.addEventListener('click', (e) => {
   e.preventDefault();
@@ -13,4 +15,14 @@ searchBtn.addEventListener('click', (e) => {
   });
 });
 
-document.querySelector('#edit').href = `/add?${window.location.href.split('?')[1].split('&')[0]}`;
+if (deleteButton) {
+  deleteButton.addEventListener('click', async () => {
+    const verify = confirm('Are you sure you want to delete this vehicle? This can not be undone.');
+    if (!verify) return;
+    const id = document.querySelector('#vehicle-id').dataset.id;
+    await fetch(`/api/vehicle/${id}`, { method: 'DELETE' });
+    window.location.href = window.location.href.split('?')[0];
+  });
+}
+
+if (editButton) editButton.href = `/add?${window.location.href.split('?')[1].split('&')[0]}`;

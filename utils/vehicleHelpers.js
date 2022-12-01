@@ -142,7 +142,7 @@ const updateVehicle = async ({
   }
 };
 
-const deleteVehicle = async ({ id }) => {
+const deleteVehicle = async ({ id, req }) => {
   if (!isLoggedIn({ req })) return { loggedIn: false };
   try {
     const deleteVehicle = await Vehicle.destroy({
