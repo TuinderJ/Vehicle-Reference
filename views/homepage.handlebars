@@ -22,10 +22,16 @@
 
     {{!-- JOKE --}}
 
-    <div>
-      <h1>{{jokeObj.setup}}</h1>
-      <p>{{jokeObj.delivery}}</p>
-    </div>
+    {{#if jokeObj}}
+      <div>
+        {{#if jokeObj.joke}}
+          <h1>{{jokeObj.joke}}</h1>
+        {{else}}
+          <h1>{{jokeObj.setup}}</h1>
+          <p>{{jokeObj.delivery}}</p>
+        {{/if}}
+      </div>
+    {{/if}}
 
     {{!-- -----CARD LAYOUT----- --}}
     {{#if error}}

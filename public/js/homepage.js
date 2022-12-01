@@ -21,7 +21,8 @@ if (deleteButton) {
     if (!verify) return;
     const id = document.querySelector('#vehicle-id').dataset.id;
     await fetch(`/api/vehicle/${id}`, { method: 'DELETE' });
-    window.location.href = window.location.href.split('?')[0];
+    console.log('here');
+    window.location.replace('/');
   });
 }
 

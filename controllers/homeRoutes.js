@@ -6,28 +6,33 @@ require('dotenv').config();
 
 router.get('/', async (req, res) => {
   try {
-    const options = {
-      method: 'GET',
-      url: 'https://jokeapi-v2.p.rapidapi.com/joke/Any',
-      params: {
-        format: 'json',
-        idRange: '0-150',
-        blacklistFlags: 'nsfw,racist',
-        'safe-mode': 'safe-mode',
-      },
-      headers: {
-        'X-RapidAPI-Key': process.env.JOKE_API,
-        'X-RapidAPI-Host': 'jokeapi-v2.p.rapidapi.com',
-      },
-    };
+    let jokeObj = undefined;
+    try {
+      const options = {
+        method: 'GET',
+        url: 'https://jokeapi-v2.p.rapidapi.com/joke/Any',
+        params: {
+          format: 'json',
+          idRange: '0-150',
+          blacklistFlags: 'nsfw,racist',
+          'safe-mode': 'safe-mode',
+        },
+        headers: {
+          'X-RapidAPI-Key': process.env.JOKE_API,
+          'X-RapidAPI-Host': 'jokeapi-v2.p.rapidapi.com',
+        },
+      };
 
-    const joke = await axios.request(options);
+      const joke = await axios.request(options);
 
-    const jokeObj = {
-      setup: joke.data.setup,
-      delivery: joke.data.delivery,
-    };
-    console.log(jokeObj);
+      jokeObj = {
+        joke: joke.data.joke,
+        setup: joke.data.setup,
+        delivery: joke.data.delivery,
+      };
+    } catch (err) {
+      jokeObj.joke = 'Sorry, no joke today.';
+    }
 
     const { unitNumber, customerUnitNumber, vin, last8 } = req.query;
     if (unitNumber || customerUnitNumber || vin || last8) {
@@ -46,7 +51,6 @@ router.get('/', async (req, res) => {
       res.render('homepage', { logged_in: req.session.logged_in, jokeObj });
     }
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -55,7 +59,6 @@ router.get('/login', async (req, res) => {
   try {
     res.render('login');
   } catch (err) {
-    console.log(err);
     res.json({ err });
   }
 });
@@ -70,9 +73,7 @@ router.get('/add', async (req, res) => {
     } else {
       res.render('add-vehicle', { categories, logged_in: req.session.logged_in });
     }
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 });
 
 module.exports = router;

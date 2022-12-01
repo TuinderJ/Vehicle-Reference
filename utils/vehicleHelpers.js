@@ -66,13 +66,12 @@ const getVehicle = async ({ unitNumber, customerUnitNumber, vin, last8 }) => {
 
     return vehicleData[0];
   } catch (err) {
-    console.log(err);
     return 'No vehicle found';
   }
 };
 
-const createVehicle = async ({ unitNumber, customerUnitNumber, vin, categories, values }) => {
-  if (!isLoggedIn()) return { loggedIn: false };
+const createVehicle = async ({ req, unitNumber, customerUnitNumber, vin, categories, values }) => {
+  if (!isLoggedIn({ req })) return { loggedIn: false };
   try {
     const newVehicle = { unitNumber, customerUnitNumber, vin };
 
@@ -87,11 +86,11 @@ const createVehicle = async ({ unitNumber, customerUnitNumber, vin, categories, 
     Value.bulkCreate(newValues);
     return addedVehicle;
   } catch (err) {
+    console.log(err);
     return { err };
   }
 };
 
-// TODO: fix
 const updateVehicle = async ({
   req,
   id,
@@ -129,7 +128,6 @@ const updateVehicle = async ({
 
     const created = await bulkCreateValues({ req, newValues });
     const updated = await bulkUpdateValues({ req, valuesToUpdate });
-    console.log(created, updated);
 
     if (updateVehicle) {
       return 'vehicle updated';
@@ -137,7 +135,6 @@ const updateVehicle = async ({
       return 'vehicle not found or no updates';
     }
   } catch (err) {
-    console.log(err);
     return { err };
   }
 };
