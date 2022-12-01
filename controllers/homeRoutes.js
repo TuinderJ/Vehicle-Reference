@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
         params: {
           format: 'json',
           idRange: '0-150',
-          blacklistFlags: 'nsfw,racist,explicit,sexist',
+          blacklistFlags: 'nsfw,religious,political,racist,sexist,explicit',
           'safe-mode': 'safe-mode',
         },
         headers: {
