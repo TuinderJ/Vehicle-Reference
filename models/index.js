@@ -16,7 +16,7 @@ Vehicle.belongsToMany(Category, {
   through: VehicleCategory,
   foreignKey: 'cVehicleId',
 });
-// // Comment this for seeding
+// Comment this for seeding
 
 module.exports = {
   User,
