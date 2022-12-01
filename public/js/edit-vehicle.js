@@ -60,7 +60,7 @@ const handleSubmit = async (e) => {
     body: JSON.stringify(vehicle),
   });
 
-  // location.href =
+  location.replace(`/?vin=${vehicle.vin}`)
 };
 
 document.querySelector('#submit-button').addEventListener('click', handleSubmit);
